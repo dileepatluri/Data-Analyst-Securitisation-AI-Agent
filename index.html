@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Securitisation Risk Assessment Dashboard — Advanced bond portfolio analytics, IFRS 9 ECL, stress testing, waterfall modeling, and gamified Risk Arena simulation platform.">
+  <title>Securitisation AI Agent — Risk Assessment Dashboard</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="app-header">
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-icon">S</div>
+        <div>
+          <div class="logo-text">Securitisation AI Agent</div>
+          <div class="logo-subtitle">Risk Assessment Dashboard</div>
+        </div>
+      </div>
+      <div class="header-info">
+        <div class="header-badge">
+          <span class="dot"></span>
+          <span>Valuation: 31 Oct 2024</span>
+        </div>
+        <div class="header-badge">301 Bonds</div>
+        <div class="header-badge">₹32.07 Bn Portfolio</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== TAB NAVIGATION ===== -->
+  <nav class="tab-nav" id="tab-nav">
+    <ul class="tab-list">
+      <li><button class="tab-btn active" data-tab="executive" id="tab-btn-executive"><span class="tab-icon">📊</span>Executive Summary</button></li>
+      <li><button class="tab-btn" data-tab="risk" id="tab-btn-risk"><span class="tab-icon">⚡</span>Risk Analytics</button></li>
+      <li><button class="tab-btn" data-tab="ifrs9" id="tab-btn-ifrs9"><span class="tab-icon">🏛️</span>IFRS 9 ECL</button></li>
+      <li><button class="tab-btn" data-tab="waterfall" id="tab-btn-waterfall"><span class="tab-icon">💧</span>Waterfall</button></li>
+      <li><button class="tab-btn" data-tab="stress" id="tab-btn-stress"><span class="tab-icon">🔥</span>Stress Testing</button></li>
+      <li><button class="tab-btn" data-tab="rating" id="tab-btn-rating"><span class="tab-icon">⭐</span>Rating Agency</button></li>
+      <li><button class="tab-btn" data-tab="investor" id="tab-btn-investor"><span class="tab-icon">📈</span>Investor Report</button></li>
+      <li><button class="tab-btn" data-tab="yieldcurve" id="tab-btn-yieldcurve"><span class="tab-icon">📉</span>Yield Curve</button></li>
+      <li><button class="tab-btn" data-tab="arena" id="tab-btn-arena"><span class="tab-icon">🎮</span>Risk Arena</button></li>
+      <li><button class="tab-btn" data-tab="casestudy" id="tab-btn-casestudy"><span class="tab-icon">📚</span>Case Studies</button></li>
+    </ul>
+  </nav>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="main-content" id="main-content">
+
+    <!-- ========== TAB 1: EXECUTIVE SUMMARY ========== -->
+    <section class="tab-panel active" id="panel-executive">
+      <div class="section-header">
+        <div>
+          <h1 class="section-title">Executive Summary</h1>
+          <p class="section-subtitle">Portfolio overview as of 31 October 2024</p>
+        </div>
+      </div>
+
+      <!-- KPI Cards -->
+      <div class="kpi-grid" id="kpi-executive">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Charts Row -->
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-title">Credit Rating Distribution <span class="badge">by Market Value</span></div>
+          <div class="chart-container"><canvas id="chart-rating-dist"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Sector Allocation <span class="badge">by Market Value</span></div>
+          <div class="chart-container"><canvas id="chart-sector-alloc"></canvas></div>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-title">Maturity Profile <span class="badge">by Key Rate Bucket</span></div>
+          <div class="chart-container"><canvas id="chart-maturity-profile"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Top 10 Issuers <span class="badge">Concentration</span></div>
+          <div class="chart-container"><canvas id="chart-issuer-conc"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Bond Holdings Table -->
+      <div class="chart-card">
+        <div class="chart-title">Bond Holdings <span class="badge">Top 20 by Market Value</span></div>
+        <div class="data-table-wrapper" style="max-height:400px; overflow-y:auto;">
+          <table class="data-table" id="table-bonds">
+            <thead>
+              <tr>
+                <th>Bond ID</th>
+                <th>Issuer</th>
+                <th>Sector</th>
+                <th>Rating</th>
+                <th class="text-right">Coupon</th>
+                <th class="text-right">YTM</th>
+                <th class="text-right">Mod. Duration</th>
+                <th class="text-right">Market Value (₹)</th>
+                <th class="text-right">Weight</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-bonds"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TAB 2: RISK ANALYTICS ========== -->
+    <section class="tab-panel" id="panel-risk">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Risk Analytics</h2>
+          <p class="section-subtitle">Duration, convexity, spread, and scenario analysis</p>
+        </div>
+      </div>
+
+      <div class="kpi-grid" id="kpi-risk"></div>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-title">Key Rate Duration Contribution <span class="badge">bps</span></div>
+          <div class="chart-container"><canvas id="chart-krd"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Duration vs Convexity Scatter <span class="badge">by Bond</span></div>
+          <div class="chart-container"><canvas id="chart-dur-conv"></canvas></div>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card full-width">
+          <div class="chart-title">Scenario P&L Analysis <span class="badge">Yield Shift Impact</span></div>
+          <div class="chart-container"><canvas id="chart-scenario-pnl"></canvas></div>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-title">Spread Distribution <span class="badge">OAS (bps)</span></div>
+          <div class="chart-container"><canvas id="chart-spread-dist"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Concentration Risk — HHI <span class="badge">Herfindahl Index</span></div>
+          <div class="chart-container"><canvas id="chart-hhi"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TAB 3: IFRS 9 ECL ========== -->
+    <section class="tab-panel" id="panel-ifrs9">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">IFRS 9 — Expected Credit Loss</h2>
+          <p class="section-subtitle">ECL staging, PD/LGD/EAD, and provision analysis</p>
+        </div>
+      </div>
+
+      <!-- Stage Cards -->
+      <div class="stage-cards" id="stage-cards"></div>
+
+      <div class="kpi-grid" id="kpi-ifrs9"></div>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-title">ECL by Stage <span class="badge">₹ Lakhs</span></div>
+          <div class="chart-container"><canvas id="chart-ecl-stage"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">ECL by Sector <span class="badge">Distribution</span></div>
+          <div class="chart-container"><canvas id="chart-ecl-sector"></canvas></div>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card full-width">
+          <div class="chart-title">ECL by Credit Rating <span class="badge">Provision Coverage</span></div>
+          <div class="chart-container"><canvas id="chart-ecl-rating"></canvas></div>
+        </div>
+      </div>
+
+      <!-- ECL Summary Table -->
+      <div class="chart-card">
+        <div class="chart-title">ECL Summary Table</div>
+        <div class="data-table-wrapper">
+          <table class="data-table" id="table-ecl">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th class="text-right">Exposure (₹ Cr)</th>
+                <th class="text-right">PD (%)</th>
+                <th class="text-right">LGD (%)</th>
+                <th class="text-right">ECL (₹ Lakhs)</th>
+                <th class="text-right">Coverage (%)</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-ecl"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TAB 4: WATERFALL ========== -->
+    <section class="tab-panel" id="panel-waterfall">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Waterfall & Cash Flow</h2>
+          <p class="section-subtitle">4-tranche sequential payment waterfall model</p>
+        </div>
+      </div>
+
+      <div class="kpi-grid" id="kpi-waterfall"></div>
+
+      <div class="charts-grid">
+        <div class="chart-card full-width">
+          <div class="chart-title">Cash Flow Waterfall <span class="badge">Annual Payment Priority</span></div>
+          <div class="chart-container"><canvas id="chart-waterfall"></canvas></div>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-title">Tranche Structure <span class="badge">Credit Enhancement</span></div>
+          <div class="chart-container"><canvas id="chart-tranche-structure"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">OC & IC Test Results <span class="badge">Compliance</span></div>
+          <div class="chart-container"><canvas id="chart-oc-ic"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Waterfall Table -->
+      <div class="chart-card">
+        <div class="chart-title">Tranche Details</div>
+        <div class="data-table-wrapper">
+          <table class="data-table" id="table-waterfall">
+            <thead>
+              <tr>
+                <th>Tranche</th>
+                <th>Rating</th>
+                <th class="text-right">Size (₹ Cr)</th>
+                <th class="text-right">Coupon</th>
+                <th class="text-right">Interest Due (₹ Cr)</th>
+                <th class="text-right">Interest Paid (₹ Cr)</th>
+                <th class="text-right">Credit Enhancement</th>
+                <th class="text-center">OC Test</th>
+                <th class="text-center">IC Test</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-waterfall"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TAB 5: STRESS TESTING ========== -->
+    <section class="tab-panel" id="panel-stress">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Stress Testing</h2>
+          <p class="section-subtitle">Monte Carlo simulation: 1,000 scenarios — VaR, CVaR, and scenario analysis</p>
+        </div>
+      </div>
+
+      <div class="kpi-grid" id="kpi-stress"></div>
+
+      <div class="charts-grid">
+        <div class="chart-card full-width">
+          <div class="chart-title">P&L Distribution <span class="badge">1,000 Monte Carlo Scenarios</span></div>
+          <div class="chart-container"><canvas id="chart-pnl-dist"></canvas></div>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-title">Duration vs Convexity P&L Decomposition <span class="badge">Effect</span></div>
+          <div class="chart-container"><canvas id="chart-pnl-decomp"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Parallel Shift Impact <span class="badge">P&L vs Shift</span></div>
+          <div class="chart-container"><canvas id="chart-shift-impact"></canvas></div>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card full-width">
+          <div class="chart-title">Worst 20 Scenarios <span class="badge">Tail Risk</span></div>
+          <div class="data-table-wrapper" style="max-height:400px; overflow-y:auto;">
+            <table class="data-table" id="table-worst-scenarios">
+              <thead>
+                <tr>
+                  <th>Scenario</th>
+                  <th class="text-right">Parallel Shift (bps)</th>
+                  <th class="text-right">Twist (bps)</th>
+                  <th class="text-right">Butterfly (bps)</th>
+                  <th class="text-right">Duration P&L (₹)</th>
+                  <th class="text-right">Convexity P&L (₹)</th>
+                  <th class="text-right">Total P&L (₹)</th>
+                  <th class="text-right">P&L (%)</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-worst-scenarios"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TAB 6: RATING AGENCY ========== -->
+    <section class="tab-panel" id="panel-rating">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Rating Agency Analytics</h2>
+          <p class="section-subtitle">S&P, Moody's, and Fitch compliance and stress frameworks</p>
+        </div>
+      </div>
+
+      <div class="kpi-grid" id="kpi-rating"></div>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-title">S&P Stress Testing <span class="badge">Loss Multiples</span></div>
+          <div class="chart-container"><canvas id="chart-sp-stress"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Moody's WARF Analysis <span class="badge">Rating Factor</span></div>
+          <div class="chart-container"><canvas id="chart-moodys-warf"></canvas></div>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card full-width">
+          <div class="chart-title">Credit Enhancement Adequacy <span class="badge">vs Stressed Losses</span></div>
+          <div class="chart-container"><canvas id="chart-ce-adequacy"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Rating Compliance Table -->
+      <div class="chart-card">
+        <div class="chart-title">Rating Agency Compliance Summary</div>
+        <div class="data-table-wrapper">
+          <table class="data-table" id="table-rating-compliance">
+            <thead>
+              <tr>
+                <th>Test</th>
+                <th>Agency</th>
+                <th class="text-right">Metric</th>
+                <th class="text-right">Threshold</th>
+                <th class="text-center">Status</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-rating-compliance"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TAB 7: INVESTOR REPORT ========== -->
+    <section class="tab-panel" id="panel-investor">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Investor Report</h2>
+          <p class="section-subtitle">Monthly servicer report and tranche performance</p>
+        </div>
+      </div>
+
+      <div class="kpi-grid" id="kpi-investor"></div>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-title">Tranche Performance <span class="badge">Market Value</span></div>
+          <div class="chart-container"><canvas id="chart-tranche-perf"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Portfolio Quality Distribution</div>
+          <div class="chart-container"><canvas id="chart-quality-dist"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Investor Summary Table -->
+      <div class="chart-card">
+        <div class="chart-title">Portfolio Summary — Servicer Report</div>
+        <div class="data-table-wrapper">
+          <table class="data-table" id="table-investor">
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th class="text-right">Value</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-investor"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TAB 8: YIELD CURVE ========== -->
+    <section class="tab-panel" id="panel-yieldcurve">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Yield Curve Analysis</h2>
+          <p class="section-subtitle">Historical Indian government bond yield curve — 2022 to 2024</p>
+        </div>
+      </div>
+
+      <div class="kpi-grid" id="kpi-yieldcurve"></div>
+
+      <div class="charts-grid">
+        <div class="chart-card full-width">
+          <div class="chart-title">Current vs Historical Yield Curves <span class="badge">Multi-Period</span></div>
+          <div class="chart-container"><canvas id="chart-yc-comparison"></canvas></div>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-title">10Y Yield Trend <span class="badge">Historical</span></div>
+          <div class="chart-container"><canvas id="chart-10y-trend"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Term Spread (30Y – 3M) <span class="badge">Slope Indicator</span></div>
+          <div class="chart-container"><canvas id="chart-term-spread"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Yield Curve Data Table -->
+      <div class="chart-card">
+        <div class="chart-title">Current Yield Curve Data</div>
+        <div class="data-table-wrapper">
+          <table class="data-table" id="table-yieldcurve">
+            <thead>
+              <tr>
+                <th>Tenor</th>
+                <th class="text-right">Yield (%)</th>
+                <th class="text-right">Zero Rate (%)</th>
+                <th class="text-right">Forward Rate (%)</th>
+                <th class="text-right">Discount Factor</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-yieldcurve"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TAB 9: RISK ARENA ========== -->
+    <section class="tab-panel" id="panel-arena">
+      <div class="arena-hero">
+        <h2>⚔️ Securitisation Risk Arena</h2>
+        <p>Test your financial analytics skills through realistic, time-pressured challenges</p>
+        <div class="xp-bar mt-lg" style="max-width:500px; margin-left:auto; margin-right:auto;">
+          <span class="xp-label" id="arena-xp-label">0 / 1,000 XP</span>
+          <div class="xp-track"><div class="xp-fill" id="arena-xp-fill" style="width:0%"></div></div>
+        </div>
+      </div>
+
+      <!-- Tier Selection -->
+      <div class="tier-cards" id="tier-cards">
+        <div class="tier-card" data-tier="pool" id="tier-pool">
+          <div class="tier-level">Tier 1</div>
+          <div class="tier-name">🏗️ Pool Builder</div>
+          <div class="tier-desc">Calculate pool metrics from raw portfolio data — WAC, WAM, durations, and stratification tables</div>
+          <div class="tier-xp">+100 XP per challenge</div>
+        </div>
+        <div class="tier-card" data-tier="tranche" id="tier-tranche">
+          <div class="tier-level">Tier 2</div>
+          <div class="tier-name">🏗️ Tranche Engineer</div>
+          <div class="tier-desc">Design waterfall structures, calculate credit enhancement, and analyze OC/IC compliance tests</div>
+          <div class="tier-xp">+200 XP per challenge</div>
+        </div>
+        <div class="tier-card" data-tier="crisis" id="tier-crisis">
+          <div class="tier-level">Tier 3</div>
+          <div class="tier-name">🌪️ Crisis Navigator</div>
+          <div class="tier-desc">Navigate real-time crisis scenarios with streaming data and stress test under time pressure</div>
+          <div class="tier-xp">+500 XP per challenge</div>
+        </div>
+      </div>
+
+      <!-- Challenge Area (hidden initially) -->
+      <div id="arena-challenge-area" class="hidden">
+        <div class="challenge-panel">
+          <div class="challenge-header">
+            <div>
+              <span class="header-badge" id="arena-tier-badge">Tier 1</span>
+              <span style="margin-left:8px; font-weight:600;" id="arena-q-counter">Question 1 of 5</span>
+            </div>
+            <div class="challenge-timer" id="arena-timer">⏱️ 02:00</div>
+          </div>
+          <div class="challenge-question" id="arena-question"></div>
+          <div class="answer-options" id="arena-options"></div>
+          <div style="margin-top:var(--space-lg); display:flex; gap:var(--space-md); justify-content:flex-end;">
+            <button class="btn btn-ghost" id="arena-skip-btn">Skip</button>
+            <button class="btn btn-primary" id="arena-submit-btn">Submit Answer</button>
+          </div>
+          <div id="arena-feedback" class="mt-lg hidden" style="padding:var(--space-md); border-radius:var(--radius-md);"></div>
+        </div>
+      </div>
+
+      <!-- Results (hidden initially) -->
+      <div id="arena-results" class="hidden">
+        <div class="chart-card" style="text-align:center; padding:var(--space-2xl);">
+          <h3 style="font-size:1.5rem; margin-bottom:var(--space-md);">🎯 Challenge Complete!</h3>
+          <div id="arena-score" style="font-size:3rem; font-weight:900; color:var(--accent-primary);"></div>
+          <p class="text-muted mt-sm" id="arena-result-msg"></p>
+          <button class="btn btn-primary mt-lg" id="arena-retry-btn">Try Another Challenge</button>
+        </div>
+      </div>
+
+      <!-- Badges Section -->
+      <div class="chart-card mt-lg">
+        <div class="chart-title">🏆 Badges & Achievements</div>
+        <div class="badges-grid" id="badges-grid">
+          <div class="badge-card"><div class="badge-icon">📊</div><div class="badge-name">Pool Analyst</div><div class="badge-desc">Complete Tier 1</div></div>
+          <div class="badge-card"><div class="badge-icon">🏗️</div><div class="badge-name">Tranche Master</div><div class="badge-desc">Complete Tier 2</div></div>
+          <div class="badge-card"><div class="badge-icon">🌪️</div><div class="badge-name">Crisis Commander</div><div class="badge-desc">Complete Tier 3</div></div>
+          <div class="badge-card"><div class="badge-icon">⚡</div><div class="badge-name">Speed Demon</div><div class="badge-desc">Under 30s per Q</div></div>
+          <div class="badge-card"><div class="badge-icon">🎯</div><div class="badge-name">Perfect Score</div><div class="badge-desc">100% accuracy</div></div>
+          <div class="badge-card"><div class="badge-icon">📐</div><div class="badge-name">ECL Expert</div><div class="badge-desc">ECL questions aced</div></div>
+          <div class="badge-card"><div class="badge-icon">💧</div><div class="badge-name">Waterfall Wizard</div><div class="badge-desc">Waterfall mastery</div></div>
+          <div class="badge-card"><div class="badge-icon">📈</div><div class="badge-name">Risk Oracle</div><div class="badge-desc">All tiers complete</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TAB 10: CASE STUDIES ========== -->
+    <section class="tab-panel" id="panel-casestudy">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Case Studies</h2>
+          <p class="section-subtitle">Real-world securitisation crises through a data analytics lens</p>
+        </div>
+      </div>
+
+      <!-- Case Study 1: 2008 GFC -->
+      <div class="case-study-card" id="case-gfc">
+        <h3>📉 2008 Global Financial Crisis — The Subprime Mortgage Meltdown</h3>
+        <div class="case-meta">
+          <span>📅 2007–2009</span>
+          <span>🌍 United States / Global</span>
+          <span>💰 $10.2 Trillion in losses</span>
+        </div>
+        <div class="case-body" id="case-gfc-body"></div>
+        <div class="case-metrics" id="case-gfc-metrics"></div>
+      </div>
+
+      <!-- Case Study 2: IL&FS -->
+      <div class="case-study-card" id="case-ilfs">
+        <h3>🏦 IL&FS Collapse 2018 — India's Shadow Banking Crisis</h3>
+        <div class="case-meta">
+          <span>📅 September 2018</span>
+          <span>🇮🇳 India</span>
+          <span>💰 ₹91,000 Crore Debt</span>
+        </div>
+        <div class="case-body" id="case-ilfs-body"></div>
+        <div class="case-metrics" id="case-ilfs-metrics"></div>
+      </div>
+
+      <!-- Case Study 3: COVID-19 -->
+      <div class="case-study-card" id="case-covid">
+        <h3>🦠 COVID-19 Moratorium Impact — Unprecedented Mass Forbearance</h3>
+        <div class="case-meta">
+          <span>📅 March–August 2020</span>
+          <span>🌍 Global</span>
+          <span>💰 $3 Trillion in restructured debt</span>
+        </div>
+        <div class="case-body" id="case-covid-body"></div>
+        <div class="case-metrics" id="case-covid-metrics"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer style="text-align:center; padding:var(--space-xl); color:var(--text-muted); font-size:0.72rem; border-top:1px solid var(--border-color); position:relative; z-index:1;">
+    <p>Securitisation AI Agent — Risk Assessment Dashboard © 2024</p>
+    <p style="margin-top:4px;">Built with advanced DAX-equivalent analytics | 100+ Financial Measures | Bond Portfolio: 301 Securities</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

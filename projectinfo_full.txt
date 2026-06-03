@@ -1,0 +1,3987 @@
+ 
+ 
+ 
+ 
+DATA ANALYST - SECURITISATION AI AGENT 
+Category: Financial Data Analytics | Risk Assessment | Securitisation | DAX 
+Timeline: 15 Days | AI-Accelerated Innovation & Research Project 
+Target: Undergraduate / MBA / CA (Inter)  
+ 
+TASK: 
+Build securitisation risk assessment dashboards using the most complex DAX expressions for 
+Microsoft Power BI, Analysis Services, and Power Pivot. Work with assumed bank data from 
+SAP/ERP systems covering auto loans, mortgages, and structured credit. Develop IFRS 9 ECL 
+models, waterfall calculations, stress testing frameworks, and investor reporting solutions. Design a 
+gamified Securitisation Risk Arena simulation platform e.g. analyse real-world securitisation crises 
+through a data analytics lens.  
+ 
+PART A: TRAINING MATERIAL & LEARNING RESOURCES 
+PART B: GAMIFIED SIMULATION BUSINESS CONCEPT 
+PART C: CASE STUDIES & REAL-WORLD APPLICATIONS 
+PART D: 15-DAY PROJECT METHODOLOGY & DELIVERABLES 
+PART E: NO-CODE TOOLS & PLATFORMS GUIDE 
+PART F: SUBMISSION PROTOCOL 
+ 
+Important Note: 
+This Project is designed, developed, and administered solely by Zetheta Algorithms Private Limited 
+("Zetheta") for the purpose of assessing candidates, students, or event participants on behalf of engaging 
+employers, institutes, or event organisers. Completion of this Project does not guarantee employment, 
+academic outcomes, awards, or any other result - all such decisions remain at the sole discretion of the 
+respective engaging party. Zetheta may use AI-assisted tools to evaluate submissions; such outputs are 
+indicative in nature and may be inaccurate or incomplete. By participating, you consent to your 
+performance data, scores, and submissions being shared with relevant engaging parties for assessment and 
+decision-making purposes. 
+ 
+ 
+ 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 1 
+ 
+ 
+ 
+ 
+ 
+EXECUTIVE SUMMARY 
+Securitisation AI Agent is an enterprise-scale financial analytics project where data analyst 
+interns build sophisticated risk assessment dashboards for securitised asset portfolios. Working 
+with assumed data extracted from SAP/ERP systems of a financial institution, participants 
+develop the most complex DAX (Data Analysis Expressions) formulations used across Microsoft 
+data platforms including Power BI, Analysis Services, and Power Pivot in Excel. 
+The project transforms raw securitisation data - including mortgage-backed securities (MBS), 
+asset-backed securities (ABS), collateralised loan obligations (CLOs), and collateralised debt 
+obligations (CDOs) - into actionable risk intelligence through advanced DAX measures that 
+would typically require years of experience to master. The project spans six comprehensive parts: 
+Part A provides deep-dive training material on securitisation fundamentals and DAX analytics 
+across all major asset classes; Part B presents the Securitisation Risk Arena gamified simulation 
+business concept; Part C applies the analytics framework to real-world crises including the 2008 
+Global Financial Crisis and the IL&FS collapse; Part D provides a detailed 15-day day-by-day 
+development methodology; Part E guides interns to the best no-code tools and regulatory data 
+sources; and Part F specifies the 1000-point assessment criteria with detailed rubrics. 
+The core challenge students must solve: How does a data analyst transform raw loan-level data 
+from SAP/ERP systems into the comprehensive suite of risk metrics that credit committees, 
+rating agencies, investors, and regulators demand? The answer lies in mastering advanced DAX 
+patterns - CALCULATE with complex filter modifications, iterator functions for weighted 
+computations, virtual tables for dynamic stratification, time intelligence for trend analysis, and 
+context transition for portfolio-level aggregation - combined with deep domain knowledge of 
+securitisation structures, waterfall mechanics, IFRS 9 ECL computation, and regulatory reporting 
+requirements. 
+Students will also design Securitisation Risk Arena - a browser-based gamified simulation 
+platform that trains data analysts through realistic, time-pressured, scenario-driven challenges 
+covering the full spectrum of securitisation analytics: from building basic pool metrics to 
+navigating crisis-mode stress testing under time pressure. 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 2 
+ 
+ 
+ 
+ 
+ 
+PART A: TRAINING MATERIAL & LEARNING RESOURCES 
+SECTION A1: FOUNDATIONAL CONCEPTS 
+A1.1 Securitisation Fundamentals 
+What is Securitisation? 
+Securitisation is the process of pooling various types of financial assets (loans, receivables, 
+mortgages) and converting them into tradeable securities backed by the cash flows from those 
+assets. The process involves transferring assets from an originator to a Special Purpose Vehicle 
+(SPV), which issues securities (tranches) with varying risk-return profiles to investors. 
+Key Structures: 
+●​ Pass-Through Securities: Cash flows from underlying assets pass directly to investors 
+proportionally 
+●​ Pay-Through Securities (CMOs): Cash flows are restructured into sequential tranches 
+with different maturities 
+●​ Credit-Tranched Securities (CDOs/CLOs): Cash flows allocated by seniority-senior 
+tranches absorb losses last, equity tranches absorb first 
+A1.2 DAX Fundamentals for Securitisation 
+Evaluation Context - The Foundation of DAX: 
+Every DAX expression evaluates within a context. Understanding context is the single most 
+critical skill. 
+Filter Context: 
+Total Outstanding Balance = 
+SUM ( Loans\[CurrentBalance\] ) 
+Row Context (Iterator): 
+Weighted Average LTV = 
+DIVIDE ( 
+SUMX ( Loans, Loans\[CurrentBalance\] \* Loans\[LTV_Ratio\] ), 
+SUM ( Loans\[CurrentBalance\] ) 
+) 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 3 
+ 
+ 
+ 
+ 
+ 
+Context Transition: 
+Portfolio ECL = 
+SUMX ( 
+Loans, 
+CALCULATE ( \[PD\] \* \[LGD\] \* Loans\[EAD\] ) 
+) 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 4 
+ 
+ 
+ 
+ 
+ 
+SECTION A2: SECURITISATION DATA REQUIREMENTS 
+This section provides comprehensive coverage of data requirements across all major 
+securitisation asset classes, as mandated by rating agencies (S&P Global Ratings, Moody's 
+Investors Service, Fitch Ratings, and Indian agencies CRISIL and ICRA) and required by 
+institutional investors. Understanding these data fields is critical for building accurate DAX 
+models and Power BI dashboards. 
+A2.1 Auto Loan ABS - Data Requirements 
+Auto loan asset-backed securities are among the most common securitisation structures globally. 
+Rating agencies require granular loan-level data to assess credit risk, prepayment risk, and 
+residual value risk. The following data elements are mandatory for new issue ratings and 
+ongoing surveillance. 
+A. Loan-Level Data Tape (Rating Agency Requirement) 
+The loan-level data tape is the single most important document in any auto loan securitisation. 
+S&P, Moody's, and Fitch all require this tape at cutoff for initial rating and monthly for 
+surveillance. Each row represents one loan in the pool. 
+Loan Identification Fields: 
+Field Name 
+Data Type 
+Description 
+Rating Agency Use 
+Loan ID 
+VARCHAR(20) 
+Unique loan identifier De-duplication, 
+tracking 
+Pool ID 
+VARCHAR(15) 
+Securitisation deal 
+identifier 
+Pool allocation 
+Originator ID 
+VARCHAR(10) 
+Lending institution 
+code 
+Originator 
+concentration 
+Servicer ID 
+VARCHAR(10) 
+Current servicer code 
+Servicing risk 
+assessment 
+Account Status 
+VARCHAR(20) 
+Current/Delinquent/D
+efault 
+Portfolio health 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 5 
+ 
+ 
+ 
+ 
+ 
+Origination Data Fields: 
+Field Name 
+Data Type 
+Description 
+Rating Agency Use 
+Origination Date 
+DATE 
+Date loan was funded 
+Seasoning, vintage 
+analysis 
+Original Balance 
+DECIMAL(15,2) 
+Original loan amount 
+Pool factor 
+calculation 
+Original Term 
+INT 
+Loan term in months 
+Weighted avg 
+maturity 
+Interest Rate 
+DECIMAL(5,2) 
+Contract coupon rate 
+WAC, excess spread 
+Rate Type 
+VARCHAR(10) 
+Fixed/Floating/Hybri
+d 
+Interest rate risk 
+Origination Channel 
+VARCHAR(20) 
+Dealer/Direct/Online/
+DSA 
+Channel risk analysis 
+Loan Purpose 
+VARCHAR(30) 
+New/Used/Refinance 
+Collateral risk 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 6 
+ 
+ 
+ 
+ 
+ 
+Vehicle/Collateral Data Fields: 
+Field Name 
+Data Type 
+Description 
+Rating Agency Use 
+Vehicle Make 
+VARCHAR(30) 
+Manufacturer name 
+Residual value 
+curves 
+Vehicle Model 
+VARCHAR(30) 
+Model name 
+Depreciation 
+analysis 
+Vehicle Year 
+INT 
+Manufacturing year 
+Age-based default 
+curves 
+Vehicle Type 
+VARCHAR(20) 
+Sedan/SUV/Hatchback/
+Truck 
+Segment risk factors 
+New/Used Flag 
+BOOLEAN 
+New or pre-owned 
+LGD differentiation 
+Original Vehicle 
+Value 
+DECIMAL(15,2) 
+Value at origination 
+LTV at origination 
+Current Vehicle 
+Value 
+DECIMAL(15,2) 
+Current estimated value Current LTV 
+Mileage at 
+Origination 
+INT 
+Odometer reading (km) 
+Depreciation input 
+Vehicle Registration 
+State 
+VARCHAR(30) 
+State of registration 
+Geographic 
+concentration 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 7 
+ 
+ 
+ 
+ 
+ 
+Borrower Data Fields: 
+ 
+Field Name 
+Data Type 
+Description 
+Rating Agency Use 
+CIBIL Score at 
+Origination 
+INT 
+Credit score at loan 
+booking 
+PD model input 
+CIBIL Score Current 
+INT 
+Latest credit score 
+Credit migration 
+Employment Type 
+VARCHAR(20) 
+Salaried/Self-Employ
+ed/Business 
+Income stability 
+Annual Income 
+DECIMAL(15,2) 
+Verified annual 
+income 
+DTI calculation 
+DTI Ratio 
+DECIMAL(5,4) 
+Debt-to-income ratio 
+Affordability 
+assessment 
+Borrower Age 
+INT 
+Age at origination 
+Demographic risk 
+Geographic Region 
+VARCHAR(20) 
+State/Region 
+Concentration risk 
+Years at Current 
+Employment 
+INT 
+Employment tenure 
+Stability indicator 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 8 
+ 
+ 
+ 
+ 
+ 
+Performance Data Fields (Monthly Updated): 
+ 
+Field Name 
+Data Type 
+Description 
+Rating Agency Use 
+Reporting Date 
+DATE 
+Snapshot date 
+Time series tracking 
+Current Balance 
+DECIMAL(15,2) 
+Outstanding principal 
+Pool factor 
+Scheduled Payment 
+DECIMAL(12,2) 
+Monthly EMI due 
+Collection rate 
+Actual Payment 
+DECIMAL(12,2) 
+Amount collected 
+Delinquency calc 
+Delinquency Status 
+VARCHAR(20) 
+Current/30/60/90/Def
+ault 
+Delinquency pipeline 
+Days Past Due 
+INT 
+Number of days 
+delinquent 
+Bucket classification 
+Cumulative Loss 
+DECIMAL(15,2) 
+Total realised losses 
+Loss curve 
+Recovery Amount 
+DECIMAL(15,2) 
+Recovered from 
+defaults 
+Recovery rate 
+Prepayment Amount 
+DECIMAL(15,2) 
+Voluntary 
+prepayment 
+CPR/ABS calculation 
+Modification Flag 
+BOOLEAN 
+Loan restructured 
+flag 
+Performance 
+exclusion 
+IFRS 9 Stage 
+INT 
+1/2/3 staging 
+ECL provision bucket 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 9 
+ 
+ 
+ 
+ 
+ 
+B. Pool-Level Statistics Required by Rating Agencies 
+In addition to loan-level tapes, rating agencies require the following pool-level summary 
+statistics. These are calculated using DAX measures in the Power BI model: 
+Pool Composition Metrics: 
+●​ Weighted Average Coupon (WAC): Interest rate weighted by current balance 
+●​ Weighted Average Maturity (WAM): Remaining term weighted by current balance 
+●​ Weighted Average Loan Age (WALA): Months on book weighted by current balance 
+●​ Weighted Average LTV: Loan-to-value ratio weighted by current balance 
+●​ Weighted Average CIBIL Score: Credit score weighted by current balance 
+●​ Weighted Average DTI: Debt-to-income weighted by current balance 
+DAX Implementation - All Weighted Averages: 
+WAC = DIVIDE(SUMX(Loans, 
+Loans\[InterestRate\]\*Loans\[CurrentBalance\]), 
+SUM(Loans\[CurrentBalance\])) 
+WAM = DIVIDE(SUMX(Loans, 
+Loans\[RemainingTerm\]\*Loans\[CurrentBalance\]), 
+SUM(Loans\[CurrentBalance\])) 
+WALA = DIVIDE(SUMX(Loans, 
+Loans\[MonthsOnBook\]\*Loans\[CurrentBalance\]), 
+SUM(Loans\[CurrentBalance\])) 
+Weighted Avg LTV = 
+DIVIDE( 
+SUMX(FactLoanPerformance, 
+FactLoanPerformance\[LTV_Current\]\*FactLoanPerformance\[Curre
+ntBalance\]), 
+SUM(FactLoanPerformance\[CurrentBalance\]) 
+) 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 10 
+ 
+ 
+ 
+ 
+ 
+Concentration Metrics: 
+●​ Top 10 Borrower Concentration: Percentage of pool held by 10 largest borrowers 
+●​ Geographic Concentration: Top 5 states by outstanding balance 
+●​ Originator Concentration: Breakdown by originating entity 
+●​ Vehicle Make Concentration: Exposure by manufacturer 
+●​ Herfindahl-Hirschman Index (HHI): Measure of portfolio diversification 
+HHI Index = 
+VAR TotalBal = CALCULATE(SUM(Loans\[CurrentBalance\]), 
+ALL(DimBorrower)) 
+VAR BorrowerShares = 
+ADDCOLUMNS( 
+SUMMARIZE(Loans, DimBorrower\[BorrowerID\]), 
+\"Share\", 
+DIVIDE(CALCULATE(SUM(Loans\[CurrentBalance\])), 
+TotalBal) 
+) 
+RETURN SUMX(BorrowerShares, \[Share\]\^2) 
+Top N Borrower Exposure = 
+VAR TotalBal = CALCULATE(SUM(Loans\[CurrentBalance\]), 
+ALL(DimBorrower)) 
+VAR BorrowerRanked = 
+ADDCOLUMNS( 
+SUMMARIZE(Loans, DimBorrower\[BorrowerID\]), 
+\"Balance\", CALCULATE(SUM(Loans\[CurrentBalance\])) 
+) 
+VAR TopN = TOPN(10, BorrowerRanked, \[Balance\], DESC) 
+RETURN DIVIDE(SUMX(TopN, \[Balance\]), TotalBal) 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 11 
+ 
+ 
+ 
+ 
+ 
+C. S&P Global - Specific Auto ABS Requirements 
+S&P Global Ratings uses its LEVELS (Loan Evaluation and Estimate of Loss System) model for 
+auto ABS. The model requires specific data inputs beyond the standard tape: 
+LEVELS Model Inputs: 
+●​ Base Case Loss Expectation: Derived from historical loss curves of the originator 
+●​ Loss Timing Curve: Monthly distribution of expected losses 
+●​ Recovery Lag: Average time from default to recovery (typically 3-6 months for auto) 
+●​ Voluntary Prepayment Speed: Expressed as Absolute Prepayment Speed (ABS) or 
+Conditional Prepayment Rate (CPR) 
+●​ Recovery Rate by LTV Band: Different recovery assumptions for high-LTV vs low-LTV 
+●​ Stress Multiples by Rating Level: AAA = 3.0x-4.0x base loss, AA = 2.5x-3.0x, A = 
+2.0x-2.5x 
+DAX for S&P Stress Scenarios: 
+SP Stressed Loss AAA = 
+VAR BaseLoss = \[Base Case Expected Loss\] 
+VAR StressMultiple = 3.5 // AAA stress factor 
+VAR StressedLoss = BaseLoss \* StressMultiple 
+VAR CreditEnhancement = \[Senior Tranche CE Percentage\] 
+RETURN 
+IF(StressedLoss \> CreditEnhancement, \"INSUFFICIENT CE\", 
+\"ADEQUATE 
+CE\") 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 12 
+ 
+ 
+ 
+ 
+ 
+D. Moody's - Specific Auto ABS Requirements 
+Moody's uses its Idealised Default Table and MILAN (Moody's Individual Loan Analysis) 
+framework. Key additional data requirements: 
+●​ Lognormal Loss Distribution Parameters: Mean and standard deviation of loss 
+●​ Correlation Assumptions: Intra-pool asset correlation (typically 3-8% for auto) 
+●​ Seasoning Adjustment: Performance credit for seasoned pools 
+●​ Originator Assessment: Qualitative score of originator's underwriting standards 
+●​ Servicer Quality Assessment: Score of servicer's collection capabilities 
+E. Fitch Ratings - Specific Auto ABS Requirements 
+Fitch uses a multi-step approach requiring: 
+●​ Expected Cumulative Net Loss (CNL): Base case loss estimate 
+●​ Loss Timing Distribution: Front-loaded vs back-loaded loss patterns 
+●​ Rating Factor Multiples: Stress multiples applied to base case (AAAsf = 5.0x-6.0x for 
+subprime, 3.0x-4.0x for prime) 
+●​ Excess Spread Analysis: Monthly excess spread available to absorb losses 
+●​ Liquidity Assessment: Ability of structure to meet payment obligations during stress 
+F. Indian Rating Agencies - CRISIL and ICRA Requirements 
+For Indian auto loan securitisations, CRISIL and ICRA require additional India-specific data: 
+●​ RBI Priority Sector Classification: Whether loans qualify under PSL guidelines 
+●​ GST Registration of Borrower: For commercial vehicle loans 
+●​ Aadhaar Verification Status: KYC completeness 
+●​ NACH Mandate Status: Auto-debit consent for EMI collection 
+●​ Insurance Coverage: Comprehensive vs third-party vs uninsured 
+●​ Hypothecation Registration: RC book endorsement status 
+●​ Loan Restructuring Under RBI Moratorium: Covid moratorium status history 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 13 
+ 
+ 
+ 
+ 
+ 
+DAX for Indian Regulatory Metrics: 
+NACH Mandate Coverage = 
+DIVIDE( 
+CALCULATE(SUM(Loans\[CurrentBalance\]), 
+Loans\[NACH_Status\]=\"Active\"), 
+SUM(Loans\[CurrentBalance\]) 
+) 
+Insurance Coverage Rate = 
+DIVIDE( 
+CALCULATE(COUNTROWS(Loans), 
+Loans\[InsuranceType\]\<\>\"Nil\"), 
+COUNTROWS(Loans) 
+) 
+A2.2 Residential Mortgage-Backed Securities (RMBS) - Data Requirements 
+RMBS securitisations are the most data-intensive asset class. Rating agencies require extensive 
+property-level, borrower-level, and loan-level data to assess credit risk, prepayment risk, and 
+market value decline risk. 
+A. RMBS Loan-Level Data Tape 
+Mortgage-Specific Fields (beyond generic loan fields): 
+Field Name 
+Data Type 
+Description 
+Rating Agency Use 
+Property Type 
+VARCHAR(20) 
+Flat/House/Plot/Comm
+ercial 
+Property risk 
+segmentation 
+Property City 
+VARCHAR(30) 
+City/town of property 
+Metro/Tier-2/Tier-3 
+analysis 
+Property PIN Code 
+VARCHAR(6) 
+Postal code 
+Micro-market risk 
+Property Area (sq ft) 
+INT 
+Built-up area 
+Per sq ft valuation 
+Original Valuation 
+DECIMAL(15,2) 
+Appraised value at 
+origination 
+LTV at origination 
+Current Valuation 
+DECIMAL(15,2) 
+Most recent appraisal 
+Current LTV, MVD 
+risk 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 14 
+ 
+ 
+ 
+ 
+ 
+Valuation Date 
+DATE 
+Date of latest appraisal Staleness of 
+valuation 
+Valuation Method 
+VARCHAR(20) 
+Desktop/Drive-by/Full 
+Valuation reliability 
+CERSAI 
+Registration 
+BOOLEAN 
+Registered with 
+CERSAI 
+Legal enforceability 
+Title Insurance 
+BOOLEAN 
+Title insurance 
+obtained 
+Legal risk mitigation 
+Occupancy Status 
+VARCHAR(20) 
+Owner-occupied/Rente
+d/Vacant 
+Default probability 
+input 
+Co-Borrower Flag 
+BOOLEAN 
+Loan has co-applicant 
+Income stability 
+PMAY Subsidy 
+BOOLEAN 
+Pradhan Mantri Awas 
+Yojana 
+Government 
+guarantee 
+DSCR 
+DECIMAL(5,2) 
+Debt Service Coverage 
+Ratio 
+Affordability metric 
+ 
+RMBS-Specific Rating Agency Requirements: 
+●​ Market Value Decline (MVD) Assumptions: S&P uses Quick Sale Adjustment (QSA) of 
+15-20% for India 
+●​ Foreclosure Timeline: Average time from default to property liquidation (India: 18-36 
+months under SARFAESI) 
+●​ SARFAESI Applicability: Whether lender can invoke SARFAESI Act for recovery 
+●​ Property Price Index (PPI): Regional house price appreciation/depreciation trends 
+●​ Rental Yield Data: For investment properties, used in DSCR calculations 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 15 
+ 
+ 
+ 
+ 
+ 
+DAX for RMBS-Specific Metrics: 
+Market Value Decline Stressed LTV = 
+VAR CurrentLTV = \[Weighted Avg LTV\] 
+VAR MVD_Haircut = 0.20 // 20% market value decline 
+VAR StressedPropertyValue = 
+SUMX(Loans, Loans\[CurrentPropertyValue\] \* (1 - 
+MVD_Haircut)) 
+VAR TotalBalance = SUM(Loans\[CurrentBalance\]) 
+RETURN DIVIDE(TotalBalance, StressedPropertyValue) 
+Foreclosure Period Loss = 
+VAR AvgForeclosurePeriod = 24 // months 
+VAR MonthlyCarryCost = 0.005 // 50bps monthly 
+VAR CarryCostLoss = 
+SUMX( 
+FILTER(Loans, Loans\[IsDefaulted\]), 
+Loans\[CurrentBalance\] \* MonthlyCarryCost \* 
+AvgForeclosurePeriod 
+) 
+RETURN CarryCostLoss 
+B. RMBS Pool Stratification Tables 
+Rating agencies require the following stratification tables. Each stratification shows loan count, 
+current balance, percentage of pool, weighted average coupon, and weighted average LTV: 
+1.​ LTV Distribution: 0-50%, 50-60%, 60-70%, 70-75%, 75-80%, 80-85%, 85-90%, 90%+ 
+2.​ CIBIL Score Distribution: \<600, 600-650, 650-700, 700-750, 750-800, 800+ 
+3.​ Loan Size Distribution: \<5L, 5-10L, 10-20L, 20-50L, 50L-1Cr, 1Cr+ 
+4.​ Geographic Distribution: By State and by Metro/Tier-2/Tier-3 classification 
+5.​ Seasoning Distribution: 0-6M, 6-12M, 12-24M, 24-36M, 36-60M, 60M+ 
+6.​ Property Type Distribution: Flat, Independent House, Row House, Plot + Construction 
+7.​ Employment Type: Salaried, Self-Employed Professional, Self-Employed Business 
+8.​ Interest Rate Distribution: By 50bps bands 
+9.​ Original Term Distribution: By 12-month bands 
+10.​DTI Distribution: \<20%, 20-30%, 30-40%, 40-50%, 50%+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 16 
+ 
+ 
+ 
+ 
+ 
+DAX for Dynamic Stratification: 
+// Generic stratification measure - works with any dimension 
+Strat % of Pool = 
+DIVIDE( 
+SUM(FactLoanPerformance\[CurrentBalance\]), 
+CALCULATE(SUM(FactLoanPerformance\[CurrentBalance\]), 
+REMOVEFILTERS()) 
+) 
+Strat Loan Count = 
+DISTINCTCOUNT(FactLoanPerformance\[LoanID\]) 
+Strat WAC = 
+DIVIDE( 
+SUMX(FactLoanPerformance, 
+FactLoanPerformance\[InterestRate\]\*FactLoanPerformance\[Curr
+entBalance\]), 
+SUM(FactLoanPerformance\[CurrentBalance\]) 
+) 
+A2.3 Collateralised Loan Obligations (CLO) - Data Requirements 
+CLOs securitise portfolios of leveraged loans (senior secured corporate loans). The data 
+requirements are significantly different from consumer ABS due to the corporate nature of 
+underlying assets. 
+A. Loan-Level Data for CLO Collateral 
+Field Name 
+Data Type 
+Description 
+Rating Agency Use 
+Obligor Name 
+VARCHAR(100) 
+Corporate borrower 
+name 
+Concentration limits 
+Industry Code 
+VARCHAR(10) 
+GICS/ICB industry 
+code 
+Industry 
+concentration 
+Moody’s CFR 
+VARCHAR(5) 
+Corporate Family 
+Rating 
+Default probability 
+S&P Issuer Rating 
+VARCHAR(5) 
+Issuer credit rating 
+Rating migration risk 
+Facility Type 
+VARCHAR(20) 
+Term Loan A/B, 
+Revolver 
+Seniority 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 17 
+ 
+ 
+ 
+ 
+ 
+Seniority 
+VARCHAR(20) 
+First Lien/Second 
+Lien 
+Recovery rate 
+EBITDA 
+DECIMAL(15,2) 
+Trailing 12M 
+EBITDA 
+Leverage calculation 
+Total Debt 
+DECIMAL(15,2) 
+Total funded debt 
+Leverage ratio 
+Leverage Ratio 
+DECIMAL(5,2) 
+Debt/EBITDA 
+Credit quality 
+Interest Coverage 
+DECIMAL(5,2) 
+EBITDA/Interest 
+Debt service ability 
+Spread (bps) 
+INT 
+Margin over 
+benchmark 
+Yield analysis 
+LIBOR/SOFR Floor 
+DECIMAL(5,2) 
+Rate floor 
+Excess spread 
+Maturity Date 
+DATE 
+Final maturity 
+WAL calculation 
+Country 
+VARCHAR(30) 
+Country of domicile 
+Sovereign risk 
+Cov-Lite Flag 
+BOOLEAN 
+Covenant-lite loan 
+Structural risk 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 18 
+ 
+ 
+ 
+ 
+ 
+B. CLO Compliance Tests (Calculated in DAX) 
+These tests must be monitored monthly and displayed on dashboards: 
+// Weighted Average Spread Test 
+WAS Test = 
+VAR PortfolioWAS = 
+DIVIDE(SUMX(CLOLoans, 
+CLOLoans\[Spread_bps\]\*CLOLoans\[ParAmount\]), 
+SUM(CLOLoans\[ParAmount\])) 
+VAR WAS_Trigger = 350 // basis points 
+RETURN IF(PortfolioWAS \>= WAS_Trigger, \"PASS\", \"FAIL\") 
+// Weighted Average Rating Factor (WARF) Test 
+WARF Test = 
+VAR PortfolioWARF = 
+DIVIDE( 
+SUMX(CLOLoans, RELATED(RatingFactors\[MoodysRF\]) \* 
+CLOLoans\[ParAmount\]), 
+SUM(CLOLoans\[ParAmount\]) 
+) 
+VAR WARF_Limit = 2800 
+RETURN IF(PortfolioWARF \<= WARF_Limit, \"PASS\", \"FAIL\") 
+// Diversity Score (Moody's) 
+Diversity Score = 
+VAR IndustryConcentrations = 
+ADDCOLUMNS( 
+SUMMARIZE(CLOLoans, CLOLoans\[IndustryCode\]), 
+\"Share\", DIVIDE(CALCULATE(SUM(CLOLoans\[ParAmount\])), 
+CALCULATE(SUM(CLOLoans\[ParAmount\]),ALL(CLOLoans))) 
+) 
+RETURN SUMX(IndustryConcentrations, MIN(\[Share\], 0.10/0.10)) 
+// CCC Bucket Test 
+CCC Exposure = 
+DIVIDE( 
+CALCULATE(SUM(CLOLoans\[ParAmount\]), CLOLoans\[MoodysCFR\] IN 
+{\"Caa1\",\"Caa2\",\"Caa3\",\"Ca\",\"C\"}), 
+SUM(CLOLoans\[ParAmount\]) 
+) 
+// Typically limited to 7.5% of portfolio 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 19 
+ 
+ 
+ 
+ 
+ 
+A2.4 Credit Card ABS - Data Requirements 
+Credit card securitisations are revolving structures (unlike amortising auto/mortgage pools). The 
+data requirements reflect the revolving nature and the trust structure. 
+A. Account-Level Data Tape 
+Field Name 
+Data Type 
+Description 
+Rating Agency Use 
+Account ID 
+VARCHAR(20) 
+Unique card account 
+number 
+Tracking 
+Account Open Date 
+DATE 
+Date card was issued 
+Seasoning 
+Credit Limit 
+DECIMAL(12,2) 
+Sanctioned credit 
+limit 
+Utilisation analysis 
+Current Balance 
+DECIMAL(12,2) 
+Outstanding balance 
+Pool size 
+Minimum Payment 
+Due 
+DECIMAL(10,2) 
+Monthly minimum 
+payment 
+Payment rate 
+Payment Amount 
+DECIMAL(10,2) 
+Actual payment 
+received 
+Payment rate calc 
+Purchase Volume 
+DECIMAL(12,2) 
+Monthly purchases 
+Trust yield 
+Cash Advance 
+Volume 
+DECIMAL(12,2) 
+Cash withdrawals 
+Higher risk segment 
+APR – Purchase 
+DECIMAL(5,2) 
+Annual rate for 
+purchases 
+Yield calculation 
+APR – Cash Advance DECIMAL(5,2) 
+Rate for cash 
+advances 
+Yield calculation 
+Delinquency Status 
+VARCHAR(20) 
+Current/30/60/90/Cha
+rgeoff 
+Loss measurement 
+Utilisation Rate 
+DECIMAL(5,4) 
+Balance / Credit Limit Risk indicator 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 20 
+ 
+ 
+ 
+ 
+ 
+Revolving Flag 
+BOOLEAN 
+Carries balance 
+month-to-month 
+Yield analysis 
+ 
+B. Credit Card Trust Performance Metrics 
+Monthly trust-level metrics required by investors: 
+// Monthly Payment Rate (MPR) - Key credit card metric 
+Monthly Payment Rate = 
+DIVIDE( 
+SUM(CardAccounts\[PaymentAmount\]), 
+CALCULATE(SUM(CardAccounts\[CurrentBalance\]), 
+PREVIOUSMONTH(DimDate\[Date\])) 
+) 
+// Excess Spread 
+Excess Spread = 
+\[Trust Yield\] - \[Investor Coupon\] - \[Servicing Fee\] - 
+\[Charge-off Rate\] 
+// Trust Yield 
+Trust Yield = 
+DIVIDE( 
+SUM(CardAccounts\[InterestCharged\]) + 
+SUM(CardAccounts\[FeeIncome\]), 
+CALCULATE(SUM(CardAccounts\[CurrentBalance\]), 
+PREVIOUSMONTH(DimDate\[Date\])) 
+) \* 12 // Annualised 
+// Three-Month Average Excess Spread (Early Amortisation 
+Trigger) 
+3M Avg Excess Spread = 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 21 
+ 
+ 
+ 
+ 
+ 
+AVERAGEX( 
+DATESINPERIOD(DimDate\[Date\], MAX(DimDate\[Date\]), -3, 
+MONTH), 
+CALCULATE(\[Excess Spread\]) 
+) 
+Early amortisation is triggered if the three-month average excess spread falls below zero. This is 
+a critical metric for credit card ABS investors. 
+A2.5 Commercial Mortgage-Backed Securities (CMBS) - Data Requirements 
+CMBS securitises commercial real estate loans. The data is property-focused rather than 
+borrower-focused, with emphasis on cash flow analysis and property valuation. 
+A. Property-Level Data 
+ 
+Field Name 
+Data Type 
+Description 
+Rating Agency Use 
+Property Name 
+VARCHAR(100) 
+Name of commercial 
+property 
+Identification 
+Property Type 
+VARCHAR(30) 
+Office/Retail/Industria
+l/Hotel 
+Sector risk 
+Net Operating 
+Income 
+DECIMAL(15,2) 
+Annual NOI 
+DSCR calculation 
+Appraised Value 
+DECIMAL(15,2) 
+Most recent appraisal 
+LTV calculation 
+Occupancy Rate 
+DECIMAL(5,2) 
+Current occupied 
+percentage 
+Cash flow stability 
+Gross Leasable Area 
+INT 
+Total leasable sq ft 
+Size metric 
+Major Tenant 
+VARCHAR(100) 
+Largest tenant by rent 
+Tenant concentration 
+WALT (Lease) 
+DECIMAL(5,2) 
+Weighted avg lease 
+term 
+Cash flow duration 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 22 
+ 
+ 
+ 
+ 
+ 
+Cap Rate 
+DECIMAL(5,4) 
+Capitalisation rate 
+Valuation metric 
+DSCR 
+DECIMAL(5,2) 
+Debt Service 
+Coverage Ratio 
+Primary credit metric 
+Year Built 
+INT 
+Construction year 
+Physical risk 
+Environmental Grade VARCHAR(5) 
+LEED/GRIHA rating 
+ESG metric 
+ 
+CMBS-Specific DAX Measures: 
+// DSCR at Pool Level 
+Pool DSCR = 
+DIVIDE( 
+SUM(CMBSLoans\[NetOperatingIncome\]), 
+SUM(CMBSLoans\[AnnualDebtService\]) 
+) 
+// LTV at Property Level 
+CMBS Weighted LTV = 
+DIVIDE( 
+SUM(CMBSLoans\[CurrentBalance\]), 
+SUMX(CMBSLoans, CMBSLoans\[AppraisedValue\]) 
+) 
+// Maturity Default Risk (Balloon Risk) 
+Balloon Exposure = 
+CALCULATE( 
+SUM(CMBSLoans\[CurrentBalance\]), 
+CMBSLoans\[AmortisationType\] = \"Interest Only\" 
+\|\| CMBSLoans\[BalloonPaymentDue\] = TRUE 
+) 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 23 
+ 
+ 
+ 
+ 
+ 
+A2.6 Student Loan ABS - Data Requirements 
+Student loan securitisations in India (growing rapidly under the Vidya Lakshmi scheme) require 
+unique data elements reflecting the education sector. 
+A. Student Loan Data Tape 
+ 
+Field Name 
+Data Type 
+Description 
+Rating Agency Use 
+Student ID 
+VARCHAR(20) 
+Unique student identifier 
+Tracking 
+Institution Name 
+VARCHAR(100) 
+College/university 
+Institution quality 
+Course Type 
+VARCHAR(30) 
+UG/PG/Professional/PhD 
+Employment 
+probability 
+Course Duration 
+INT 
+Duration in months 
+Repayment start 
+timing 
+Moratorium Period 
+INT 
+Months before repayment 
+starts 
+Cash flow timing 
+Co-Borrower 
+Income 
+DECIMAL(15,2) 
+Parent/guardian income 
+Affordability 
+Collateral Type 
+VARCHAR(30) 
+Property/FD/LIC/Unsecur
+ed 
+Recovery potential 
+Government 
+Subsidy 
+BOOLEAN 
+Interest subsidy received 
+Cash flow impact 
+Employment Status 
+VARCHAR(20) 
+Employed/Unemployed/St
+udying 
+Repayment capacity 
+Starting Salary 
+DECIMAL(12,2) 
+First job salary (if 
+employed) 
+Repayment capacity 
+ 
+Student loan ABS presents unique challenges for DAX modelling because of the moratorium 
+period (no payments during study + 6-12 months after graduation). The delinquency pipeline 
+must account for loans not yet in repayment. 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 24 
+ 
+ 
+ 
+ 
+ 
+A2.7 Investor Reporting Requirements - All Asset Classes 
+Institutional investors (pension funds, insurance companies, mutual funds, hedge funds) require 
+standardised monthly reporting from the servicer/trustee. The Power BI dashboard must generate 
+these reports with full DAX automation. 
+A. Monthly Servicer Report - Standard Sections 
+Section 1: Pool Summary 
+●​ Beginning-of-Period Pool Balance 
+●​ Scheduled Principal Collected 
+●​ Unscheduled Principal (Prepayments) 
+●​ Losses Realised 
+●​ Recoveries on Prior Losses 
+●​ End-of-Period Pool Balance 
+●​ Pool Factor (Current Balance / Original Balance) 
+●​ Number of Loans: Beginning, Added, Removed, Ending 
+Pool Factor = 
+DIVIDE(SUM(Loans\[CurrentBalance\]), 
+CALCULATE(SUM(Loans\[OriginalLoanAmount\]), ALL(DimDate))) 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 25 
+ 
+ 
+ 
+ 
+ 
+Section 2: Delinquency and Default Report 
+ 
+Delinquency 
+Bucket 
+# Loans 
+Balance (INR) 
+% of Pool 
+Migration 
+Current 
+### 
+### 
+##.#% 
+Cured from 30 
+DPD 
+1-29 DPD 
+### 
+### 
+##.#% 
+New 
+delinquencies 
+30-59 DPD 
+### 
+### 
+##.#% 
+Rolled from 
+1-29 
+60-89 DPD 
+### 
+### 
+##.#% 
+Rolled from 
+30-59 
+90-119 DPD 
+### 
+### 
+##.#% 
+Rolled from 
+60-89 
+120+ DPD 
+### 
+### 
+##.#% 
+Rolled from 
+90-119 
+Default 
+### 
+### 
+##.#% 
+New defaults 
+Repossessed 
+### 
+### 
+##.#% 
+In recovery 
+ 
+ 
+Section 3: Loss and Recovery Report 
+●​ Cumulative Gross Losses 
+●​ Cumulative Recoveries 
+●​ Cumulative Net Losses 
+●​ Annualised Net Loss Rate 
+●​ Recovery Rate (Recoveries / Gross Losses) 
+●​ Average Time to Recovery (months) 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 26 
+ 
+ 
+ 
+ 
+ 
+// Annualised Net Loss Rate 
+Annualised Net Loss Rate = 
+VAR MonthlyLoss = \[Net Loss This Month\] 
+VAR AvgBalance = 
+DIVIDE( 
+CALCULATE(SUM(Loans\[CurrentBalance\]), 
+PREVIOUSMONTH(DimDate\[Date\])) 
+\+ SUM(Loans\[CurrentBalance\]), 
+2 
+) 
+RETURN DIVIDE(MonthlyLoss, AvgBalance) \* 12 
+Section 4: Prepayment Report 
+●​ Monthly Prepayment Amount 
+●​ Single Month Mortality (SMM) 
+●​ Conditional Prepayment Rate (CPR) - Annualised 
+●​ Constant Prepayment Rate by Vintage 
+/ / Single Month Mortality 
+SMM = 
+DIVIDE( 
+SUM(Loans\[PrepaymentAmount\]), 
+CALCULATE(SUM(Loans\[CurrentBalance\]), 
+PREVIOUSMONTH(DimDate\[Date\])) 
+\- SUM(Loans\[ScheduledPrincipal\]) 
+) 
+// Conditional Prepayment Rate (Annualised) 
+CPR = 1 - POWER(1 - \[SMM\], 12) 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 27 
+ 
+ 
+ 
+ 
+ 
+Section 5: Cash Flow Waterfall Report 
+●​ Total Collections (Interest + Principal) 
+●​ Less: Senior Fees (Trustee, Servicer, Rating Agency) 
+●​ Less: Senior Tranche Interest 
+●​ Less: Senior Tranche Principal 
+●​ Less: Mezzanine Tranche Interest (if OC/IC tests pass) 
+●​ Less: Mezzanine Tranche Principal 
+●​ Residual to Equity/Originator 
+●​ Reserve Account Balance 
+Section 6: Trigger/Covenant Status 
+ 
+Test 
+Trigger Level 
+Current Level 
+Status 
+Action 
+OC Test (Senior) >=120% 
+###% 
+PASS/FAIL 
+Sequential pay if 
+fail 
+OC Test (Mezz) 
+>=110% 
+###% 
+PASS/FAIL 
+Divert to 
+deleverage 
+IC Test (Senior) 
+>=130% 
+###% 
+PASS/FAIL 
+Trap excess 
+spread 
+IC Test (Mezz) 
+>=115% 
+###% 
+PASS/FAIL 
+Redirect cash 
+flows 
+Delinquency 
+Test 
+<=5.0% 
+###% 
+PASS/FAIL 
+Early 
+amortisation 
+Cumulative Loss 
+Test 
+<=3.0% 
+###% 
+PASS/FAIL 
+Accelerate 
+paydown 
+ 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 28 
+ 
+ 
+ 
+ 
+ 
+B. Investor Data Portals and EDGAR/SEBI Requirements 
+For Indian securitisations, SEBI requires issuers to provide investor data through designated 
+portals. The following reporting frequencies apply: 
+ 
+Report 
+Frequency 
+Deadline 
+Recipient 
+Loan-Level Data 
+Tape 
+Monthly 
+T+15 business days 
+Rating Agencies, 
+Investors 
+Servicer Report 
+Monthly 
+T+15 business days 
+Trustee, Investors 
+Pool Performance 
+Report 
+Monthly 
+T+15 business days 
+SEBI, Stock 
+Exchange 
+Compliance 
+Certificate 
+Quarterly 
+T+30 calendar days 
+Trustee, Rating 
+Agencies 
+Annual Review 
+Annually 
+Within 6 months of 
+FY end 
+Rating Agencies 
+Material Event 
+Notice 
+As required 
+Within 2 business 
+days 
+All parties 
+ 
+C. ESG Data Requirements (Emerging Standard) 
+Rating agencies increasingly require ESG-related data for securitisations. Power BI dashboards 
+should include these emerging metrics: 
+Environmental Factors: 
+●​ Energy efficiency ratings of financed properties (for RMBS) 
+●​ Electric vehicle percentage (for auto ABS) 
+●​ Climate risk exposure (flood zone, wildfire zone, cyclone prone) 
+ 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 29 
+ 
+ 
+ 
+ 
+ 
+Social Factors: 
+●​ Affordable housing percentage (for RMBS) 
+●​ Financial inclusion metrics (rural vs urban borrowers) 
+●​ Borrower hardship program participation rate 
+Governance Factors: 
+●​ Originator compliance score 
+●​ Servicer complaint resolution rate 
+●​ Data quality and reporting timeliness 
+EV Percentage in Auto Pool = 
+DIVIDE( 
+CALCULATE(SUM(Loans\[CurrentBalance\]), 
+DimVehicle\[FuelType\]=\"Electric\"), 
+SUM(Loans\[CurrentBalance\]) 
+) 
+A2.8 Days Past Due (DPD) Tables - Comprehensive Analysis 
+Days Past Due analysis is the single most scrutinised section of any securitisation performance 
+report. Rating agencies, investors, trustees, and regulators all monitor DPD tables monthly to 
+assess portfolio health, predict future losses, and determine whether structural triggers have been 
+breached. This section provides exhaustive coverage of DPD data requirements and DAX 
+implementations. 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 30 
+ 
+ 
+ 
+ 
+ 
+A. DPD Bucket Definitions and Standards 
+The industry-standard DPD buckets used across all securitisation asset classes are defined below. 
+Note that different jurisdictions and rating agencies may use slightly different definitions-the 
+DAX model must be flexible enough to accommodate all: 
+ 
+DPD Bucket 
+Days Range 
+RBI 
+Classification 
+IFRS 9 
+Stage 
+S&P 
+Treatment 
+Moody’s 
+Treatment 
+Current 
+0 DPD 
+Standard 
+Stage 1 
+Performing 
+Performing 
+1-29 DPD 
+1-29 days 
+SMA-0 
+Stage 1 
+Performing 
+Performing 
+30-59 DPD 
+30-59 days 
+SMA-1 
+Stage 2 
+Delinquent 
+Delinquent 
+60-89 DPD 
+60-89 days 
+SMA-2 
+Stage 2 
+Delinquent 
+Delinquent 
+90-119 DPD 
+90-119 days 
+Sub-standard 
+Stage 3 
+Defaulted 
+Defaulted 
+120-149 DPD 120-149 days 
+Sub-standard 
+Stage 3 
+Defaulted 
+Defaulted 
+150-179 DPD 150-179 days 
+Doubtful 
+Stage 3 
+Defaulted 
+Defaulted 
+180-359 DPD 180-359 days 
+Doubtful 
+Stage 3 
+Defaulted 
+Charged-off 
+360+ DPD 
+360+ days 
+Loss 
+Stage 3 
+Loss 
+Loss 
+ 
+RBI Special Mention Account (SMA) Classification: 
+The Reserve Bank of India requires banks to report SMA classifications as an early warning 
+system. For securitised pools, these classifications feed directly into rating agency surveillance: 
+●​ SMA-0: Principal or interest payment overdue between 1-30 days 
+●​ SMA-1: Principal or interest payment overdue between 31-60 days 
+●​ SMA-2: Principal or interest payment overdue between 61-90 days 
+●​ NPA (Non-Performing Asset): Principal or interest overdue for more than 90 days 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 31 
+ 
+ 
+ 
+ 
+ 
+Note: Under RBI's revised framework (November 2021), the date of NPA classification is 
+determined by the exact day count, not by the end of the month. This affects how DAX measures 
+count DPD. 
+B. DPD Snapshot Table - Data Structure 
+The DPD snapshot table is a monthly time-series of delinquency states for every loan. This table 
+is the foundation of all delinquency analysis and must be stored in the fact table: 
+ 
+Column Name 
+Data Type 
+Description 
+Example 
+SnapshotDate 
+DATE 
+Reporting period end 
+date 
+2024-10-31 
+LoanID 
+VARCHAR(20) 
+Unique loan identifier ZAAUTO2024-1-000
+01 
+DPD_Days 
+INT 
+Exact number of days 
+past due 
+47 
+DPD_Bucket 
+VARCHAR(15) 
+Bucket classification 
+30-59 DPD 
+DPD_Bucket_Prior 
+VARCHAR(15) 
+Bucket in prior 
+snapshot 
+1-29 DPD 
+CurrentBalance 
+DECIMAL(15,2) 
+Balance at snapshot 
+487,250.00 
+AmountOverdue 
+DECIMAL(12,2) 
+Total overdue amount 23,150.00 
+EMIsOverdue 
+INT 
+Number of EMIs 
+missed 
+2 
+LastPaymentDate 
+DATE 
+Most recent payment 
+received 
+2024-09-15 
+LastPaymentAmount 
+DECIMAL(12,2) 
+Amount of last 
+payment 
+11,575.00 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 32 
+ 
+ 
+ 
+ 
+ 
+CureFlag 
+BOOLEAN 
+Cured from 
+delinquency this 
+period 
+FALSE 
+RollFlag 
+VARCHAR(10) 
+Roll direction: 
+Worse/Better/Same 
+Worse 
+RepossessionFlag 
+BOOLEAN 
+Vehicle/property 
+repossessed 
+FALSE 
+WriteOffFlag 
+BOOLEAN 
+Loan written off this 
+period 
+FALSE 
+RBI_SMA_Class 
+VARCHAR(5) 
+SMA-0/SMA-1/SMA
+-2/NPA 
+SMA-1 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 33 
+ 
+ 
+ 
+ 
+ 
+C. DPD Distribution Report - Core DAX Measures 
+The following DAX measures generate the complete DPD distribution report required by 
+investors. Each measure produces both loan-count and balance-weighted views: 
+Measure Group 1: DPD Bucket Counts and Balances 
+// Loans in each DPD bucket 
+DPD Loan Count = 
+COUNTROWS ( FactLoanPerformance ) 
+DPD Balance = 
+SUM ( FactLoanPerformance\[CurrentBalance\] ) 
+DPD Percentage of Pool (by Balance) = 
+DIVIDE ( 
+\[DPD Balance\], 
+CALCULATE ( \[DPD Balance\], REMOVEFILTERS ( 
+FactLoanPerformance\[DPD_Bucket\] ) ) 
+) 
+DPD Percentage of Pool (by Count) = 
+DIVIDE ( 
+\[DPD Loan Count\], 
+CALCULATE ( \[DPD Loan Count\], REMOVEFILTERS ( 
+FactLoanPerformance\[DPD_Bucket\] ) ) 
+) 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 34 
+ 
+ 
+ 
+ 
+ 
+Measure Group 2: Specific Bucket Measures (for KPI Cards) 
+// Current (0 DPD) - Performing 
+Current Balance = 
+CALCULATE ( 
+SUM ( FactLoanPerformance\[CurrentBalance\] ), 
+FactLoanPerformance\[DPD_Days\] = 0 
+) 
+// 30+ DPD - Total Delinquent (Rating Agency Key Metric) 
+30Plus DPD Balance = 
+CALCULATE ( 
+SUM ( FactLoanPerformance\[CurrentBalance\] ), 
+FactLoanPerformance\[DPD_Days\] \>= 30 
+) 
+30Plus DPD Rate = 
+DIVIDE ( \[30Plus DPD Balance\], SUM ( 
+FactLoanPerformance\[CurrentBalance\] ) ) 
+// 60+ DPD - Seriously Delinquent 
+60Plus DPD Balance = 
+CALCULATE ( 
+SUM ( FactLoanPerformance\[CurrentBalance\] ), 
+FactLoanPerformance\[DPD_Days\] \>= 60 
+) 
+60Plus DPD Rate = 
+DIVIDE ( \[60Plus DPD Balance\], SUM ( 
+FactLoanPerformance\[CurrentBalance\] ) ) 
+// 90+ DPD - Default/NPA (RBI Definition) 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 35 
+ 
+ 
+ 
+ 
+ 
+90Plus DPD Balance = 
+CALCULATE ( 
+SUM ( FactLoanPerformance\[CurrentBalance\] ), 
+FactLoanPerformance\[DPD_Days\] \>= 90 
+) 
+NPA Rate (RBI) = 
+DIVIDE ( \[90Plus DPD Balance\], SUM ( 
+FactLoanPerformance\[CurrentBalance\] ) ) 
+Measure Group 3: DPD Trend Over Time 
+// 30+ DPD Rate as of any selected month (for time-series 
+chart) 
+30Plus DPD Rate by Month = 
+VAR SelectedMonth = MAX ( DimDate\[Date\] ) 
+VAR TotalBal = 
+CALCULATE ( 
+SUM ( FactLoanPerformance\[CurrentBalance\] ), 
+DimDate\[Date\] = SelectedMonth 
+) 
+VAR DelinqBal = 
+CALCULATE ( 
+SUM ( FactLoanPerformance\[CurrentBalance\] ), 
+FactLoanPerformance\[DPD_Days\] \>= 30, 
+DimDate\[Date\] = SelectedMonth 
+) 
+RETURN DIVIDE ( DelinqBal, TotalBal ) 
+// Rolling 3-Month Average DPD Rate (smoothed trend) 
+3M Avg 30Plus DPD Rate = 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 36 
+ 
+ 
+ 
+ 
+ 
+AVERAGEX ( 
+DATESINPERIOD ( DimDate\[Date\], MAX ( DimDate\[Date\] ), -3, 
+MONTH ), 
+CALCULATE ( \[30Plus DPD Rate by Month\] ) 
+) 
+// 6-Month DPD Trend Direction (for conditional formatting) 
+DPD Trend Direction = 
+VAR Current3M = \[3M Avg 30Plus DPD Rate\] 
+VAR Prior3M = 
+CALCULATE ( 
+\[3M Avg 30Plus DPD Rate\], 
+DATEADD ( DimDate\[Date\], -3, MONTH ) 
+) 
+RETURN 
+SWITCH ( 
+TRUE (), 
+Current3M \> Prior3M \* 1.1, \"Deteriorating\", 
+Current3M \< Prior3M \* 0.9, \"Improving\", 
+\"Stable\" 
+) 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 37 
+ 
+ 
+ 
+ 
+ 
+D. Roll Rate (Transition) Analysis 
+Roll rate analysis tracks how loans migrate between DPD buckets month-over-month. This is the 
+most critical predictive tool for estimating future losses. Rating agencies use roll rates to 
+calibrate their loss models, and investors monitor them for early warning signals. 
+Roll Rate Data Requirements: 
+ 
+Column Name 
+Data Type 
+Description 
+Example 
+SnapshotDate 
+DATE 
+Current reporting period 
+2024-10-31 
+LoanID 
+VARCHAR(20) 
+Loan identifier 
+ZAAUTO2024-1-00
+001 
+FromBucket 
+VARCHAR(15) 
+DPD bucket in prior 
+period 
+Current 
+ToBucket 
+VARCHAR(15) 
+DPD bucket in current 
+period 
+1-29 DPD 
+TransitionType 
+VARCHAR(10) 
+Cure/Roll/Static/Payoff/
+Default 
+Roll 
+Balance 
+DECIMAL(15,2) 
+Balance at transition 
+487,250.00 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 38 
+ 
+ 
+ 
+ 
+ 
+Roll Rate Matrix - Standard Format: 
+The roll rate matrix shows the probability of a loan moving from one DPD bucket to another in a 
+single month. This matrix is displayed as a heatmap in Power BI: 
+ 
+From ↓ / 
+To → 
+Current 
+1-29 DPD 
+30-59 DPD 60-89 DPD 90+ DPD 
+Default 
+Current 
+96.5% 
+2.8% 
+0.5% 
+0.1% 
+0.05% 
+0.05% 
+1-29 DPD 
+45.0% 
+30.0% 
+20.0% 
+3.0% 
+1.5% 
+0.5% 
+30-59 DPD 15.0% 
+10.0% 
+35.0% 
+30.0% 
+8.0% 
+2.0% 
+60-89 DPD 5.0% 
+3.0% 
+7.0% 
+30.0% 
+40.0% 
+15.0% 
+90+ DPD 
+2.0% 
+1.0% 
+2.0% 
+5.0% 
+50.0% 
+40.0% 
+ 
+DAX for Roll Rate Calculations: 
+// Roll Rate from Bucket A to Bucket B 
+Roll Rate = 
+VAR FromBucket = SELECTEDVALUE ( RollRateMatrix\[FromBucket\] 
+) 
+VAR ToBucket = SELECTEDVALUE ( RollRateMatrix\[ToBucket\] ) 
+VAR CurrentDate = MAX ( DimDate\[Date\] ) 
+VAR PriorDate = EDATE ( CurrentDate, -1 ) 
+// Loans that were in FromBucket last month 
+VAR LoansInFromBucket = 
+CALCULATETABLE ( 
+VALUES ( FactLoanPerformance\[LoanID\] ), 
+FactLoanPerformance\[DPD_Bucket\] = FromBucket, 
+DimDate\[Date\] = PriorDate 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 39 
+ 
+ 
+ 
+ 
+ 
+) 
+VAR BalanceInFromBucket = 
+CALCULATE ( 
+SUM ( FactLoanPerformance\[CurrentBalance\] ), 
+FactLoanPerformance\[DPD_Bucket\] = FromBucket, 
+DimDate\[Date\] = PriorDate 
+) 
+// Of those, how many moved to ToBucket this month 
+VAR BalanceTransitioned = 
+CALCULATE ( 
+SUM ( FactLoanPerformance\[CurrentBalance\] ), 
+FactLoanPerformance\[DPD_Bucket\] = ToBucket, 
+DimDate\[Date\] = CurrentDate, 
+TREATAS ( LoansInFromBucket, FactLoanPerformance\[LoanID\] ) 
+) 
+RETURN 
+DIVIDE ( BalanceTransitioned, BalanceInFromBucket ) 
+// Cure Rate (loans returning to Current from any delinquent 
+bucket) 
+Cure Rate = 
+VAR CurrentDate = MAX ( DimDate\[Date\] ) 
+VAR PriorDate = EDATE ( CurrentDate, -1 ) 
+VAR DelinqLastMonth = 
+CALCULATETABLE ( 
+VALUES ( FactLoanPerformance\[LoanID\] ), 
+FactLoanPerformance\[DPD_Days\] \>= 30, 
+DimDate\[Date\] = PriorDate 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 40 
+ 
+ 
+ 
+ 
+ 
+) 
+VAR DelinqBalanceLastMonth = 
+CALCULATE ( 
+SUM ( FactLoanPerformance\[CurrentBalance\] ), 
+FactLoanPerformance\[DPD_Days\] \>= 30, 
+DimDate\[Date\] = PriorDate 
+) 
+VAR CuredBalance = 
+CALCULATE ( 
+SUM ( FactLoanPerformance\[CurrentBalance\] ), 
+FactLoanPerformance\[DPD_Days\] = 0, 
+DimDate\[Date\] = CurrentDate, 
+TREATAS ( DelinqLastMonth, FactLoanPerformance\[LoanID\] ) 
+) 
+RETURN DIVIDE ( CuredBalance, DelinqBalanceLastMonth ) 
+// Roll-to-Default Rate (from 60-89 DPD to 90+ DPD) 
+Roll to Default Rate = 
+VAR CurrentDate = MAX ( DimDate\[Date\] ) 
+VAR PriorDate = EDATE ( CurrentDate, -1 ) 
+VAR Loans60to89 = 
+CALCULATETABLE ( 
+VALUES ( FactLoanPerformance\[LoanID\] ), 
+FactLoanPerformance\[DPD_Days\] \>= 60 && 
+FactLoanPerformance\[DPD_Days\] \< 90, 
+DimDate\[Date\] = PriorDate 
+) 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 41 
+ 
+ 
+ 
+ 
+ 
+VAR Balance60to89 = 
+CALCULATE ( 
+SUM ( FactLoanPerformance\[CurrentBalance\] ), 
+FactLoanPerformance\[DPD_Days\] \>= 60 && 
+FactLoanPerformance\[DPD_Days\] \< 90, 
+DimDate\[Date\] = PriorDate 
+) 
+VAR RolledToDefault = 
+CALCULATE ( 
+SUM ( FactLoanPerformance\[CurrentBalance\] ), 
+FactLoanPerformance\[DPD_Days\] \>= 90, 
+DimDate\[Date\] = CurrentDate, 
+TREATAS ( Loans60to89, FactLoanPerformance\[LoanID\] ) 
+) 
+RETURN DIVIDE ( RolledToDefault, Balance60to89 ) 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 42 
+ 
+ 
+ 
+ 
+ 
+E. DPD Ageing Report 
+The ageing report shows how long loans have been in their current delinquent state. This helps 
+distinguish between newly delinquent loans (more likely to cure) and chronically delinquent 
+loans (more likely to default). 
+// Average Days in Current DPD Bucket 
+Avg Days in Current Bucket = 
+AVERAGEX ( 
+FILTER ( FactLoanPerformance, FactLoanPerformance\[DPD_Days\] 
+\> 0 ), 
+FactLoanPerformance\[ConsecutiveMonthsDelinquent\] \* 30 
+) 
+// Chronic Delinquency Rate (30+ DPD for 3+ consecutive 
+months) 
+Chronic Delinquency Rate = 
+VAR ChronicBalance = 
+CALCULATE ( 
+SUM ( FactLoanPerformance\[CurrentBalance\] ), 
+FactLoanPerformance\[DPD_Days\] \>= 30, 
+FactLoanPerformance\[ConsecutiveMonthsDelinquent\] \>= 3 
+) 
+RETURN DIVIDE ( ChronicBalance, SUM ( 
+FactLoanPerformance\[CurrentBalance\] ) ) 
+// First-Time Delinquency Rate (new entries to 30+ DPD) 
+First Time 30Plus DPD Rate = 
+VAR CurrentDate = MAX ( DimDate\[Date\] ) 
+VAR PriorDate = EDATE ( CurrentDate, -1 ) 
+VAR NewlyDelinquent = 
+CALCULATE ( 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 43 
+ 
+ 
+ 
+ 
+ 
+SUM ( FactLoanPerformance\[CurrentBalance\] ), 
+FactLoanPerformance\[DPD_Days\] \>= 30, 
+FactLoanPerformance\[DPD_Bucket_Prior\] 
+IN 
+{ 
+\"Current\", 
+\"1-29 DPD\" 
+}, 
+DimDate\[Date\] = CurrentDate 
+) 
+VAR PoolBalance = CALCULATE ( SUM ( 
+FactLoanPerformance\[CurrentBalance\] 
+), 
+DimDate\[Date\] 
+= 
+CurrentDate 
+) 
+RETURN DIVIDE ( NewlyDelinquent, PoolBalance ) 
+F. DPD Dashboard Page Specification 
+The Power BI DPD dashboard page should contain the following visuals: 
+1.​ KPI Cards Row: Current %, 30+ DPD %, 60+ DPD %, 90+ DPD %, with trend arrows 
+and conditional formatting 
+2.​ Stacked Bar Chart: DPD distribution by balance, coloured by bucket (green to red 
+gradient) 
+3.​ Line Chart: 30+ DPD Rate monthly trend over 24 months, with 3M moving average 
+overlay 
+4.​ Roll Rate Heatmap: Matrix visual showing month-over-month transition probabilities 
+5.​ Table: Loan-level detail of all 60+ DPD loans with borrower attributes 
+6.​ Slicer Bar: Pool, Vintage Year, Region, Vehicle Type, Origination Channel 
+7.​ Gauge Chart: Delinquency trigger level vs current level (PASS/FAIL indicator) 
+8.​ Small Multiples: DPD trend split by vintage year for comparison 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 44 
+ 
+ 
+ 
+ 
+ 
+A2.9 Static Loss Data - Vintage/Static Pool Analysis 
+Static pool analysis (also called vintage analysis or static loss analysis) is the gold standard 
+methodology used by rating agencies to project expected losses for a securitised pool. Unlike 
+dynamic analysis which looks at the current snapshot, static pool analysis tracks a fixed group of 
+loans from origination to termination, regardless of when new loans are added or existing loans 
+pay off. 
+A. Static Pool Concept 
+Definition: 
+A static pool is a fixed set of loans originated during a specific time period (e.g., Q1 2022 
+originations). The performance of this pool is tracked cumulatively over time from origination 
+(Month 0) onwards. No loans are added to or removed from the static pool after the cutoff. This 
+pure measurement of credit performance eliminates the distorting effects of pool growth, 
+seasoning mix changes, and portfolio turnover. 
+Why Rating Agencies Require Static Loss Data: 
+●​ Eliminates denominator effect: New originations don't dilute delinquency rates 
+●​ Pure credit performance: Measures only credit deterioration, not portfolio management 
+●​ Vintage comparison: Enables direct comparison across origination cohorts 
+●​ Loss curve projection: Allows extrapolation of partial curves to project ultimate losses 
+●​ Originator assessment: Evaluates whether underwriting quality is stable, improving, or 
+deteriorating over time 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 45 
+ 
+ 
+ 
+ 
+ 
+B. Static Pool Data Structure 
+The static pool data table must be constructed separately from the dynamic performance data. It 
+requires a fixed denominator (original pool size at month 0) and cumulative numerators tracked 
+monthly: 
+ 
+Column Name 
+Data Type 
+Description 
+Example 
+VintageID 
+VARCHAR(10) 
+Origination cohort 
+2022-Q1 
+VintageStartDate 
+DATE 
+First day of vintage 
+period 
+2022-01-01 
+OriginalLoanCount 
+INT 
+Loans in static pool 
+at Month 0 
+1,250 
+OriginalPoolBalance 
+DECIMAL(15,2) 
+Total balance at 
+Month 0 
+125,00,00,000 
+MonthsOnBook 
+INT 
+Months since pool 
+inception 
+24 
+CumulativeDefaults_C
+ount 
+INT 
+Total defaults since 
+Month 0 
+37 
+CumulativeDefaults_B
+alance 
+DECIMAL(15,2) 
+Default balance since 
+Month 0 
+3,42,50,000 
+CumulativeGrossLoss 
+DECIMAL(15,2) 
+Gross loss amount 
+since Month 0 
+2,10,00,000 
+CumulativeRecoveries 
+DECIMAL(15,2) 
+Recoveries on 
+defaults since Month 
+0 
+65,00,000 
+CumulativeNetLoss 
+DECIMAL(15,2) 
+Net loss (Gross - 
+Recoveries) 
+1,45,00,000 
+CumulativeNetLossRat
+e 
+DECIMAL(8,6) 
+Net Loss / Original 
+Pool Balance 
+0.011600 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 46 
+ 
+ 
+ 
+ 
+ 
+CumulativePrepayment
+s 
+DECIMAL(15,2) 
+Voluntary 
+prepayments since 
+Month 0 
+18,75,00,000 
+RemainingPoolBalance DECIMAL(15,2) 
+Outstanding balance 
+of surviving loans 
+87,50,00,000 
+PoolFactor 
+DECIMAL(5,4) 
+Remaining / Original 
+balance 
+0.7000 
+CurrentDelinq30Plus 
+DECIMAL(8,6) 
+30+ DPD rate of 
+surviving loans 
+0.035000 
+ 
+C. DAX for Static Pool / Vintage Analysis 
+// Cumulative Net Loss Rate by Vintage 
+Static CNL Rate = 
+VAR SelectedVintage = SELECTEDVALUE ( StaticPool\[VintageID\] 
+) 
+VAR MaxMOB = MAX ( StaticPool\[MonthsOnBook\] ) 
+VAR CumNetLoss = 
+CALCULATE ( 
+MAX ( StaticPool\[CumulativeNetLoss\] ), 
+StaticPool\[VintageID\] = SelectedVintage, 
+StaticPool\[MonthsOnBook\] = MaxMOB 
+) 
+VAR OrigBalance = 
+CALCULATE ( 
+MAX ( StaticPool\[OriginalPoolBalance\] ), 
+StaticPool\[VintageID\] = SelectedVintage 
+) 
+RETURN DIVIDE ( CumNetLoss, OrigBalance ) 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 47 
+ 
+ 
+ 
+ 
+ 
+// Projected Ultimate CNL (Extrapolation using loss curve) 
+Projected Ultimate CNL = 
+VAR CurrentCNL = \[Static CNL Rate\] 
+VAR CurrentMOB = MAX ( StaticPool\[MonthsOnBook\] ) 
+VAR ExpectedLifeMonths = 60 // 5-year avg life for auto loans 
+// Use historical loss timing curve to extrapolate 
+VAR LossCurveCompletion = 
+CALCULATE ( 
+MAX ( LossTimingCurve\[CumulativePctOfLoss\] ), 
+LossTimingCurve\[MonthsOnBook\] = CurrentMOB 
+) 
+RETURN DIVIDE ( CurrentCNL, LossCurveCompletion ) 
+// Vintage Comparison - CNL at Same Seasoning Point 
+CNL at 12 Months = 
+CALCULATE ( 
+MAX ( StaticPool\[CumulativeNetLossRate\] ), 
+StaticPool\[MonthsOnBook\] = 12 
+) 
+CNL at 24 Months = 
+CALCULATE ( 
+MAX ( StaticPool\[CumulativeNetLossRate\] ), 
+StaticPool\[MonthsOnBook\] = 24 
+) 
+// Marginal Loss Rate (loss in current month only) 
+Marginal Monthly Loss Rate = 
+VAR CurrentMOB = MAX ( StaticPool\[MonthsOnBook\] ) 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 48 
+ 
+ 
+ 
+ 
+ 
+VAR CurrentCNL = \[Static CNL Rate\] 
+VAR PriorCNL = 
+CALCULATE ( 
+\[Static CNL Rate\], 
+StaticPool\[MonthsOnBook\] = CurrentMOB - 1 
+) 
+RETURN CurrentCNL - PriorCNL 
+// Loss Curve Slope (rate of change - early warning) 
+Loss Curve Acceleration = 
+VAR CurrentMarginal = \[Marginal Monthly Loss Rate\] 
+VAR PriorMarginal = 
+CALCULATE ( 
+\[Marginal Monthly Loss Rate\], 
+StaticPool\[MonthsOnBook\] = MAX(StaticPool\[MonthsOnBook\]) - 
+1 
+) 
+RETURN 
+IF ( 
+CurrentMarginal \> PriorMarginal \* 1.2, \"Accelerating\", 
+IF 
+( 
+CurrentMarginal 
+\< 
+PriorMarginal 
+\* 
+0.8, 
+\"Decelerating\", 
+\"Stable\" ) 
+) 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 49 
+ 
+ 
+ 
+ 
+ 
+D. Loss Timing Curve (S&P/Moody's Requirement) 
+The loss timing curve defines what percentage of total expected lifetime losses occur in each 
+month. Rating agencies use this to time-stress cash flows. The standard loss timing curve for 
+Indian auto loans peaks around months 18-30: 
+ 
+MOB 
+Range 
+% of Total 
+Loss 
+Cumulativ
+e % 
+Typical 
+Auto 
+Typical 
+RMBS 
+Typical 
+Cards 
+Typical 
+CLO 
+0-6 
+5% 
+5% 
+Low 
+Very Low 
+Moderate 
+Very Low 
+7-12 
+12% 
+17% 
+Rising 
+Low 
+Moderate 
+Low 
+13-18 
+18% 
+35% 
+Peak 
+Rising 
+Moderate 
+Rising 
+19-24 
+22% 
+57% 
+Peak 
+Rising 
+Moderate 
+Moderate 
+25-36 
+25% 
+82% 
+Declining 
+Peak 
+Moderate 
+Peak 
+37-48 
+12% 
+94% 
+Low 
+Declining 
+Declining 
+Declining 
+49-60 
+6% 
+100% 
+Tail 
+Declining 
+Low 
+Tail 
+ 
+A2.10 Dynamic Loss Data - Point-In-Time Portfolio Analysis 
+Dynamic loss data measures the performance of the current pool at a specific point in time. 
+Unlike static pool analysis, the denominator (pool size) changes every month as loans prepay, 
+amortise, default, or are added. Dynamic analysis is used for monthly investor reporting, trigger 
+testing, and operational portfolio management. 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 50 
+ 
+ 
+ 
+ 
+ 
+A. Key Differences: Static vs Dynamic 
+Dimension 
+Static Loss Data 
+Dynamic Loss Data 
+Pool Definition 
+Fixed cohort at origination 
+Current outstanding pool 
+Denominator 
+Original pool balance (fixed) 
+Current pool balance 
+(changes monthly) 
+Time Horizon 
+From origination to final 
+payment 
+Current reporting period 
+New Originations 
+Excluded after cutoff 
+Included in pool 
+Prepayments 
+Tracked but pool stays fixed 
+Reduce the current 
+denominator 
+Primary Use 
+Rating agency loss projection 
+Monthly investor reporting 
+Key Metric 
+Cumulative Net Loss Rate 
+Annualised Default/Loss Rate 
+Distortion Risk 
+None (pure measurement) 
+Denominator effect from pool 
+changes 
+DAX Complexity 
+Moderate (time-series) 
+High (point-in-time with prior 
+period references) 
+ 
+B. Dynamic Loss Data Structure 
+Column Name 
+Data Type 
+Description 
+Example 
+ReportingDate 
+DATE 
+End of reporting 
+period 
+2024-10-31 
+BOP_LoanCount 
+INT 
+Loan count at start of 
+month 
+475 
+BOP_Balance 
+DECIMAL(15,2) 
+Pool balance at start 
+of month 
+32,50,00,000 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 51 
+ 
+ 
+ 
+ 
+ 
+NewDefaults_Count 
+INT 
+Loans defaulting this 
+month 
+3 
+NewDefaults_Balanc
+e 
+DECIMAL(15,2) 
+Balance of new 
+defaults 
+18,50,000 
+GrossLoss_ThisMont
+h 
+DECIMAL(15,2) 
+Gross losses realised 
+this month 
+12,00,000 
+Recoveries_ThisMon
+th 
+DECIMAL(15,2) 
+Recoveries this 
+month 
+3,50,000 
+NetLoss_ThisMonth 
+DECIMAL(15,2) 
+Net loss this month 
+8,50,000 
+Prepayments_ThisMo
+nth 
+DECIMAL(15,2) 
+Voluntary 
+prepayments 
+1,25,00,000 
+ScheduledAmort 
+DECIMAL(15,2) 
+Scheduled principal 
+repayment 
+85,00,000 
+EOP_Balance 
+DECIMAL(15,2) 
+Pool balance at end 
+of month 
+30,22,00,000 
+EOP_LoanCount 
+INT 
+Loan count at end of 
+month 
+468 
+CollectionsTotal 
+DECIMAL(15,2) 
+Total cash collected 
+2,85,00,000 
+CollectionEfficiency 
+DECIMAL(5,4) 
+Collections / Billing 
+amount 
+0.9720 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 52 
+ 
+ 
+ 
+ 
+ 
+C. Dynamic Loss DAX Measures 
+Measure Group 1: Period Loss Rates 
+// Monthly Default Rate (MDR) 
+Monthly Default Rate = 
+VAR BOP_Balance = 
+CALCULATE ( 
+SUM ( DynamicLoss\[BOP_Balance\] ), 
+DimDate\[Date\] = MAX ( DimDate\[Date\] ) 
+) 
+VAR NewDefaults = 
+CALCULATE ( 
+SUM ( DynamicLoss\[NewDefaults_Balance\] ), 
+DimDate\[Date\] = MAX ( DimDate\[Date\] ) 
+) 
+RETURN DIVIDE ( NewDefaults, BOP_Balance ) 
+// Annualised Default Rate (Constant Default Rate - CDR) 
+CDR = 1 - POWER ( 1 - \[Monthly Default Rate\], 12 ) 
+// Monthly Loss Rate 
+Monthly Net Loss Rate = 
+VAR AvgBalance = 
+DIVIDE ( 
+CALCULATE ( SUM ( DynamicLoss\[BOP_Balance\] ) ) + 
+CALCULATE ( SUM ( DynamicLoss\[EOP_Balance\] ) ), 
+2 
+) 
+RETURN DIVIDE ( 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 53 
+ 
+ 
+ 
+ 
+ 
+CALCULATE ( SUM ( DynamicLoss\[NetLoss_ThisMonth\] ) ), 
+AvgBalance 
+) 
+// Annualised Net Loss Rate 
+Annualised Net Loss Rate = \[Monthly Net Loss Rate\] \* 12 
+// Rolling 12-Month Net Loss Rate 
+Rolling 12M Net Loss Rate = 
+VAR Last12MLoss = 
+CALCULATE ( 
+SUM ( DynamicLoss\[NetLoss_ThisMonth\] ), 
+DATESINPERIOD ( DimDate\[Date\], MAX ( DimDate\[Date\] ), -12, 
+MONTH ) 
+) 
+VAR AvgPoolBalance = 
+AVERAGEX ( 
+DATESINPERIOD ( DimDate\[Date\], MAX ( DimDate\[Date\] ), -12, 
+MONTH 
+), 
+CALCULATE ( SUM ( DynamicLoss\[BOP_Balance\] ) ) 
+) 
+RETURN DIVIDE ( Last12MLoss, AvgPoolBalance ) 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 54 
+ 
+ 
+ 
+ 
+ 
+Measure Group 2: Prepayment Speed 
+// Single Month Mortality (SMM) 
+SMM = 
+VAR BOP = CALCULATE ( SUM ( DynamicLoss\[BOP_Balance\] ) ) 
+VAR 
+SchedPrin 
+= 
+CALCULATE 
+( 
+SUM 
+( 
+DynamicLoss\[ScheduledAmort\] ) ) 
+VAR 
+Prepay 
+= 
+CALCULATE 
+( 
+SUM 
+( 
+DynamicLoss\[Prepayments_ThisMonth\] ) 
+) 
+RETURN DIVIDE ( Prepay, BOP - SchedPrin ) 
+// Conditional Prepayment Rate (CPR - Annualised) 
+CPR = 1 - POWER ( 1 - \[SMM\], 12 ) 
+// Absolute Prepayment Speed (ABS) - Alternative Measure 
+ABS Prepayment Speed = 
+DIVIDE ( 
+CALCULATE ( SUM ( DynamicLoss\[Prepayments_ThisMonth\] ) ), 
+CALCULATE ( SUM ( DynamicLoss\[BOP_Balance\] ) ) 
+) 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 55 
+ 
+ 
+ 
+ 
+ 
+Measure Group 3: Recovery and Severity 
+// Recovery Rate 
+Recovery Rate = 
+DIVIDE ( 
+CALCULATE ( SUM ( DynamicLoss\[Recoveries_ThisMonth\] ) ), 
+CALCULATE ( SUM ( DynamicLoss\[GrossLoss_ThisMonth\] ) ) 
+) 
+// Loss Severity (1 - Recovery Rate) 
+Loss Severity = 1 - \[Recovery Rate\] 
+// Average Recovery Lag (months from default to recovery) 
+Avg Recovery Lag = 
+AVERAGEX ( 
+FILTER ( 
+FactCreditEvents, 
+FactCreditEvents\[RecoveryDate\] \<\> BLANK () 
+), 
+DATEDIFF ( 
+FactCreditEvents\[DefaultDate\], 
+FactCreditEvents\[RecoveryDate\], 
+MONTH 
+) 
+) 
+// Cumulative Recovery Rate (all-time) 
+Cumulative Recovery Rate = 
+DIVIDE ( 
+CALCULATE ( SUM ( DynamicLoss\[Recoveries_ThisMonth\] ), ALL ( 
+DimDate 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 56 
+ 
+ 
+ 
+ 
+ 
+) ), 
+CALCULATE ( SUM ( DynamicLoss\[GrossLoss_ThisMonth\] ), ALL ( 
+DimDate 
+) ) 
+) 
+Measure Group 4: Cash Flow Analysis 
+// Excess Spread 
+Monthly Excess Spread = 
+VAR InterestCollected = \[Pool Interest Collections\] 
+VAR InvestorCouponDue = \[Total Tranche Interest Due\] 
+VAR ServicingFee = \[Servicer Fee Amount\] 
+VAR TrusteeFee = \[Trustee Fee Amount\] 
+VAR LossesAbsorbed = CALCULATE ( SUM ( 
+DynamicLoss\[NetLoss_ThisMonth\] ) ) 
+RETURN InterestCollected - InvestorCouponDue - ServicingFee - 
+TrusteeFee - LossesAbsorbed 
+// Annualised Excess Spread Rate 
+Annualised Excess Spread = 
+DIVIDE ( \[Monthly Excess Spread\], CALCULATE ( SUM ( 
+DynamicLoss\[BOP_Balance\] ) ) ) \* 12 
+// Months of Excess Spread Reserve 
+Excess Spread Coverage Months = 
+VAR 
+MonthlyLoss 
+= 
+CALCULATE 
+( 
+SUM 
+( 
+DynamicLoss\[NetLoss_ThisMonth\] ) 
+) 
+RETURN 
+IF ( MonthlyLoss \> 0, 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 57 
+ 
+ 
+ 
+ 
+ 
+DIVIDE ( \[Monthly Excess Spread\], MonthlyLoss ), 
+999 // No losses 
+) 
+D. Dynamic Loss Dashboard Page Specification 
+The Dynamic Loss Analysis dashboard page should contain: 
+1.​ KPI Cards: CDR, CPR, Recovery Rate, Annualised Net Loss Rate, Excess Spread 
+2.​ Waterfall Chart: BOP Balance → Scheduled Amort → Prepayments → Defaults → EOP 
+Balance 
+3.​ Line Chart: Rolling 12M Net Loss Rate and CDR trend over 24 months 
+4.​ Stacked Area Chart: Monthly collections breakdown (Interest vs Principal vs 
+Prepayments vs Recoveries) 
+5.​ Scatter Plot: CDR vs CPR by vintage (bubble size = pool balance) 
+6.​ Table: Monthly performance summary (12-month history) 
+7.​ Gauge: Excess spread level vs trigger thresholds 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 58 
+ 
+ 
+ 
+ 
+ 
+E. Reconciliation: Static vs Dynamic Loss Measures 
+The DAX model must include reconciliation measures to ensure static and dynamic loss data are 
+consistent. Any variance must be explained: 
+// Static vs Dynamic Loss Reconciliation 
+Loss Data Reconciliation Variance = 
+VAR StaticCNL = \[Static CNL Rate\] 
+VAR DynamicCumLoss = 
+DIVIDE ( 
+CALCULATE ( SUM ( DynamicLoss\[NetLoss_ThisMonth\] ), ALL ( 
+DimDate ) 
+), 
+CALCULATE 
+( 
+SUM 
+( 
+DynamicLoss\[BOP_Balance\] 
+), 
+DimDate\[Date\] = MIN 
+( DimDate\[Date\] ) ) 
+) 
+RETURN ABS ( StaticCNL - DynamicCumLoss ) 
+// Variance Explanation Flag 
+Reconciliation Status = 
+IF ( 
+\[Loss Data Reconciliation Variance\] \< 0.001, 
+\"Reconciled\", 
+\"Variance \> 10bps - Investigate\" 
+) 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 59 
+ 
+ 
+ 
+ 
+ 
+A2.11 Cross-Asset Class Data Comparison 
+The following table summarises the key differences in data requirements across securitisation 
+asset classes. This matrix helps the data analyst understand which DAX measures and dashboard 
+pages are needed for each asset class: 
+ 
+Data Element 
+Auto ABS 
+RMBS 
+CLO 
+Credit Card 
+ABS 
+Primary 
+Collateral 
+Vehicle 
+Property 
+Corporate Loans 
+Receivables 
+Amortisation 
+Fully amortising 
+Mostly 
+amortising 
+Bullet/Amortisin
+g 
+Revolving 
+Average Life 
+2-4 years 
+5-10 years 
+4-7 years 
+Controlled amort 
+Key Risk Metric 
+Default Rate 
+LTV/DSCR 
+WARF/Leverage Payment Rate 
+Prepayment 
+Measure 
+ABS/CPR 
+CPR/PSA 
+Repricing risk 
+N/A (revolving) 
+Recovery Driver 
+Vehicle resale 
+Property sale 
+Distressed debt 
+Write-off 
+Typical 
+Recovery 
+40-60% 
+50-80% 
+40-70% 
+0-10% 
+AAA Stress 
+Multiple 
+3.0-4.0x 
+2.5-3.5x 
+Varies by WARF 4.0-5.0x 
+Key 
+Concentration 
+Geographic 
+Geographic 
+Industry 
+Vintage/FICO 
+Compliance 
+Tests 
+OC/IC 
+OC/IC/DSC 
+OC/IC/WARF/
+WAS 
+Excess spread 
+IFRS 9 
+Approach 
+General model 
+General model 
+General model 
+General model 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 60 
+ 
+ 
+ 
+ 
+ 
+A2.12 Complete Dax Measure Library For Investor Reporting 
+The following DAX measures form the complete measure library needed to build an 
+investor-grade securitisation dashboard. Each measure is production-ready and has been 
+performance-optimised. 
+A. Pool Health Measures 
+// 1. Pool Factor 
+Pool Factor = DIVIDE(SUM(Loans\[CurrentBalance\]), 
+CALCULATE(SUM(Loans\[OriginalLoanAmount\]),ALL(DimDate))) 
+// 2. Delinquency Rate (by balance) 
+Delinquency Rate = 
+DIVIDE( 
+CALCULATE(SUM(Loans\[CurrentBalance\]), 
+Loans\[DelinquencyDays\]\>=30), 
+SUM(Loans\[CurrentBalance\]) 
+) 
+// 3. Serious Delinquency Rate (60+ DPD) 
+Serious Delinquency Rate = 
+DIVIDE( 
+CALCULATE(SUM(Loans\[CurrentBalance\]), 
+Loans\[DelinquencyDays\]\>=60), 
+SUM(Loans\[CurrentBalance\]) 
+) 
+// 4. Cumulative Default Rate 
+Cumulative Default Rate = 
+VAR CumDefaults = CALCULATE(SUM(Loans\[CurrentBalance\]), 
+Loans\[IsDefaulted\]=TRUE, ALL(DimDate)) 
+VAR OriginalPool = CALCULATE(SUM(Loans\[OriginalLoanAmount\]), 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 61 
+ 
+ 
+ 
+ 
+ 
+ALL(DimDate)) 
+RETURN DIVIDE(CumDefaults, OriginalPool) 
+// 5. Collection Efficiency 
+Collection Efficiency = 
+DIVIDE(SUM(Loans\[ActualPayment\]), 
+SUM(Loans\[ScheduledPaymentDue\])) 
+// 6. Constant Default Rate (CDR) - Annualised 
+CDR = 
+VAR MonthlyDefault = \[Defaults This Month\] 
+VAR BOP_Balance = CALCULATE(SUM(Loans\[CurrentBalance\]), 
+PREVIOUSMONTH(DimDate\[Date\])) 
+VAR MDR = DIVIDE(MonthlyDefault, BOP_Balance) 
+RETURN 1 - POWER(1 - MDR, 12) 
+B. Vintage Analysis Measures 
+// 7. Vintage Cumulative Loss Curve 
+Vintage Cumulative Loss = 
+VAR 
+SelectedVintage 
+= 
+SELECTEDVALUE(DimLoan\[OriginationYear\]) 
+VAR MaxMOB = MAX(FactLoanPerformance\[MonthsOnBook\]) 
+RETURN 
+CALCULATE( 
+SUM(FactCreditEvents\[NetLoss\]), 
+DimLoan\[OriginationYear\] = SelectedVintage, 
+FactLoanPerformance\[MonthsOnBook\] \<= MaxMOB, 
+ALL(DimDate) 
+) 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 62 
+ 
+ 
+ 
+ 
+ 
+C. Credit Enhancement Tracking 
+// 8. Credit Enhancement Percentage 
+Credit Enhancement % = 
+VAR SubordinationAmt = \[Subordinated Tranche Balance\] 
+VAR ExcessSpreadReserve = \[Reserve Account Balance\] 
+VAR 
+OC_Amount 
+= 
+SUM(Loans\[CurrentBalance\]) 
+- 
+\[Senior 
+Tranche 
+Balance\] 
+RETURN 
+DIVIDE(SubordinationAmt + ExcessSpreadReserve + OC_Amount, 
+SUM(Loans\[CurrentBalance\])) 
+// 9. Reserve Account Adequacy 
+Reserve Adequacy = 
+DIVIDE(\[Reserve Account Balance\], \[3M Avg Monthly Losses\]) 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 63 
+ 
+ 
+ 
+ 
+ 
+PART B: GAMIFIED SIMULATION BUSINESS CONCEPT 
+Note on the Simulation Concept: The gamified simulation concept presented in this section is 
+provided as a reference framework. Students may choose to follow this concept or design their 
+own original gamified simulation - with a different name, structure, narrative, or game 
+mechanics - as long as it meets the assessment criteria outlined in Part F. 
+ 
+SECTION B1: SECURITISATION RISK ARENA - SIMULATION OVERVIEW 
+B1.1 Business Rationale And Problem Statement 
+Securitisation Risk Arena is a browser-based gamified simulation platform designed to train and 
+assess data analysts in the specialised discipline of securitisation risk assessment through 
+realistic, time-pressured, scenario-driven challenges using advanced DAX analytics. The player 
+assumes the role of Lead Data Analyst at a fictional global bank - Meridian Structured Finance - 
+managing a $50 billion portfolio of securitised assets across MBS, ABS, CLO, and CMBS 
+structures. Each session simulates a full business day in the life of a securitisation data analyst: 
+from receiving the morning portfolio health report to delivering risk dashboards to the Chief Risk 
+Officer by end of day. 
+The Training Gap This Platform Solves: 
+Traditional securitisation analytics training relies on passive reading of rating agency 
+methodologies and regulatory guidelines, occasional shadowing of senior analysts during deal 
+closings or portfolio reviews, and learning by making errors on live reporting systems. The 
+consequences of errors in securitisation analytics are particularly severe: an incorrect ECL 
+computation can misstate the bank’s provision requirements by millions; a flawed waterfall 
+calculation can misallocate cash flows between senior and subordinated tranches; a missed 
+delinquency trend can delay early-warning triggers, leading to rating downgrades and investor 
+losses. 
+India’s securitisation market has grown significantly following the RBI’s revised securitisation 
+framework (September 2021), with issuance volumes exceeding ₹1.8 lakh crore annually. Global 
+structured finance markets process trillions in outstanding securities. Yet there is no standardised, 
+scalable training platform for securitisation data analysts that combines DAX proficiency with 
+domain expertise. Securitisation Risk Arena creates a zero-risk environment where learners 
+experience every possible analytics scenario - from routine monthly reporting to crisis-mode 
+stress testing - before encountering them in a live portfolio. 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 64 
+ 
+ 
+ 
+ 
+ 
+Target Audience: 
+●​ Primary: Undergraduate and MBA students preparing for data analytics, structured 
+finance, and risk management roles at banks, NBFCs, and rating agencies. 
+●​ Secondary: Working professionals in credit risk, portfolio analytics, and investor 
+reporting seeking to upskill on advanced DAX techniques for securitisation. 
+●​ Tertiary: Bank HR and training teams seeking to assess structured finance analytics 
+competency during hiring. 
+B1.2 Simulation Architecture 
+Core Components: 
+●​ Portfolio Library: Pre-built datasets for 6 fictional securitisation pools (auto loan ABS, 
+RMBS, CLO, credit card ABS, CMBS, student loan ABS) with 500+ loans per pool, 
+realistic field structures matching rating agency requirements. 
+●​ Market Simulator: Monthly data generator that simulates delinquency transitions, 
+prepayment behaviour, loss severity, and recovery rates based on parameterised economic 
+scenarios - benign, moderate stress, severe stress, and crisis. 
+●​ DAX Challenge Engine: Presents the player with specific analytical tasks requiring DAX 
+measure construction - from basic aggregations to complex iterator patterns, virtual table 
+computations, and time-intelligence measures. 
+●​ Waterfall Engine: Simulated cash flow waterfall that allocates collections across tranches 
+based on player-built DAX measures; errors in the waterfall formula cascade through 
+tranche payments, revealing mistakes immediately. 
+●​ Rating Agency Module: Requires the player to produce loan-level data tapes, pool 
+stratification tables, and performance metrics matching S&P, Moody’s, Fitch, CRISIL, 
+and ICRA specifications. 
+●​ ECL Engine: Embedded IFRS 9 computation module that evaluates player-built PD, 
+LGD, and EAD measures for stage classification and expected credit loss computation. 
+●​ Scoring Engine: Awards points for DAX accuracy, query performance, analytical 
+completeness, and business insight; deducts points for errors, slow queries, and missed 
+risk signals. 
+●​ Learning Layer: Every error triggers an explanation pop-up with the correct DAX 
+pattern, optimisation suggestion, and reference to the relevant securitisation concept. 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 65 
+ 
+ 
+ 
+ 
+ 
+B1.3 Game Modes 
+Campaign Mode (Primary Mode): 
+8 progressive levels, each spanning 3 simulated business days: 
+●​ Level 1 - Data Foundation: Single auto loan pool; basic CALCULATE and SUM 
+patterns; simple delinquency bucket counts. Focus: filter context, basic aggregation, and 
+data model understanding. 
+●​ Level 2 - Time Intelligence: Same pool with 12 months of history; YTD, QTD, MTD, 
+rolling averages, and period-over-period comparisons. Focus: time intelligence functions 
+and date table relationships. 
+●​ Level 3 - Iterator Mastery: Two pools (auto ABS + RMBS); weighted averages using 
+SUMX, AVERAGEX; concentration measures using TOPN and RANKX. Focus: row 
+context, iterator functions, and context transition. 
+●​ Level 4 - Virtual Tables: Three pools; SUMMARIZE, ADDCOLUMNS, GENERATE 
+patterns; dynamic stratification tables; pool-level summary computations. Focus: virtual 
+table construction and advanced DAX patterns. 
+●​ Level 5 - Waterfall Wizard: Complete cash flow waterfall allocation across senior, 
+mezzanine, and equity tranches; trigger and covenant testing; credit enhancement 
+tracking. Focus: sequential allocation logic in DAX. 
+●​ Level 6 - IFRS 9 ECL: Full ECL computation framework; PD term structures, LGD 
+estimation, EAD computation; stage classification and migration; forward-looking 
+macroeconomic overlay. Focus: regulatory capital computation. 
+●​ Level 7 - Rating Agency Reporting: Complete loan-level data tape generation for S&P, 
+Moody’s, and CRISIL; all required fields populated; validation checks passed. Focus: 
+investor reporting and regulatory compliance. 
+●​ Level 8 - Crisis Mode: Market stress scenario with spiking delinquencies, plummeting 
+recovery rates, and trigger breaches across all 6 pools simultaneously. Fund manager 
+demands real-time dashboards; rating agency requests emergency data tape; board wants 
+stress testing results by EOD. 
+Practice Mode: 
+●​ Free-play access to any single scenario type - player selects pool, asset class, scenario 
+difficulty, and DAX complexity level. 
+●​ Ideal for practising a specific DAX pattern (e.g., CALCULATETABLE, nested iterators, 
+virtual table joins). 
+●​ No penalties; unlimited attempts; step-by-step DAX guidance available. 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 66 
+ 
+ 
+ 
+ 
+ 
+Assessment Mode: 
+●​ Timed, scored, and monitored simulation session. 
+●​ Used for formal assessment during internship evaluation or bank hiring process. 
+●​ No hints; no guidance; full scoring rubric applied. 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 67 
+ 
+ 
+ 
+ 
+ 
+SECTION B2: SCORING SYSTEM AND GAME MECHANICS 
+B2.1 1000-Point Scoring Framework 
+ 
+Scoring Category 
+Points 
+Key Criteria 
+DAX Accuracy & 
+Complexity 
+300 
+All measures correct across 
+test scenarios; appropriate 
+patterns used; proper context 
+transition 
+Query Performance 
+150 
+All measures <100ms in 
+DAX Studio; efficient use of 
+variables and filter 
+propagation 
+Waterfall & Tranche 
+Allocation 
+200 
+Complete waterfall with 
+correct sequential allocation, 
+trigger testing, and credit 
+enhancement tracking 
+IFRS 9 ECL Computation 
+150 
+ECL matches Excel 
+crosscheck within 0.01% 
+variance; correct stage 
+classification 
+Investor Reporting 
+Completeness 
+100 
+All 6 monthly servicer report 
+sections automated with 
+correct DAX measures 
+Dashboard Quality & 
+Business Insight 
+100 
+8+ interactive pages; 
+drill-through; RLS for 5+ 
+roles; business insights 
+narrative 
+TOTAL 
+1000 
+ 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 68 
+ 
+ 
+ 
+ 
+ 
+Penalties: 
+●​ Hard-coded value in a DAX measure (instead of dynamic calculation): −50 points per 
+instance. 
+●​ Measure that returns incorrect sign (gain shown as loss or vice versa): −40 points. 
+●​ Missing delinquency trend that should have triggered early warning: −30 points. 
+●​ Waterfall misallocation affecting tranche payments: −25 points per tranche. 
+●​ ECL stage classification error: −20 points per misclassified segment. 
+ 
+B2.2 Progression System 
+Player Levels (8 Levels): 
+Level 
+Title 
+XP Required 
+Unlocks 
+1 
+Data Analyst Trainee 
+0 
+Tutorial scenarios; single pool; full DAX 
+guidance 
+2 
+Junior Data Analyst 
+500 
+Campaign Levels 1–2; basic DAX and 
+time intelligence 
+3 
+Data Analyst 
+1,500 
+Campaign Levels 1–4; iterator functions 
+and virtual tables 
+4 
+Senior Data Analyst 
+3,500 
+Campaign Levels 1–6; waterfall 
+calculations and ECL models 
+5 
+Lead Analyst 
+7,000 
+All Campaign Levels; complete investor 
+reporting suite 
+6 
+VP Structured Finance 
+Analytics 
+15,000 
+Crisis scenarios; real-time dashboard 
+construction under pressure 
+7 
+Director of 
+Securitisation 
+Analytics 
+25,000 
+All scenarios mastered; can design 
+challenge sets for others 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 69 
+ 
+ 
+ 
+ 
+ 
+8 
+Chief Risk Analytics 
+Officer 
+40,000 
+Teach mode enabled; enterprise 
+deployment expertise 
+ 
+Achievement Badges (25 Badges): 
+Dax Mastery Badges: 
+●​ DAX Master: Write 50+ production-grade measures across all complexity levels. 
+●​ Context Ninja: Implement 10+ CALCULATE with complex filter modifications without 
+error. 
+●​ Virtual 
+Table 
+Architect: 
+Build 
+5+ 
+measures 
+using 
+SUMMARIZE/ADDCOLUMNS/GENERATE patterns. 
+●​ Performance Hawk: All measures execute in <100ms in DAX Studio. 
+Securitisation Expertise Badges: 
+●​ Waterfall Wizard: Implement complete tranche waterfall allocation with zero 
+misallocation. 
+●​ ECL Engineer: Build full IFRS 9 ECL framework matching Excel crosscheck within 
+0.01%. 
+●​ Rating Agency Reporter: Generate complete loan-level data tapes for 3+ rating agencies. 
+●​ Vintage Veteran: Complete 5 vintage/static pool analyses with correct cumulative loss 
+curves. 
+Crisis Management Badges: 
+●​ Crisis Survivor: Complete Level 8 crisis scenario with Distinction grade. 
+●​ Early Warning Champion: Detect 3 portfolio deterioration signals before trigger breach. 
+●​ Stress Test Master: Run 4+ what-if scenarios with correct ECL impact computation. 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 70 
+ 
+ 
+ 
+ 
+ 
+SECTION B3: SCENARIO ENGINE DESIGN 
+B3.1 Scenario Categories 
+Category 
+% of Challenges 
+Description 
+Routine Scenarios 
+30% 
+Standard monthly reporting; benign markets; 
+baseline competency and speed building 
+Portfolio Stress 
+25% 
+Economic deterioration; delinquency 
+migration; stress-adjusted ECL; waterfall 
+recomputation 
+Rating Agency Review 
+20% 
+Complete data tape generation; pool 
+stratification; validation and reconciliation 
+Regulatory Scenarios 
+15% 
+RBI/SEBI audit simulation; methodology 
+documentation; model validation evidence 
+Crisis Scenarios 
+10% 
+2008-style crisis; cascading defaults; multiple 
+trigger breaches; extreme time pressure 
+ 
+B3.2 Sample Scenario: The Vintage Crisis 
+It is the 15th of the month - monthly reporting day. You receive the latest performance data for 
+your auto loan ABS pool. The 2022 vintage is showing alarming deterioration: 60+ DPD has 
+jumped from 2.1% to 4.8% in a single month, the highest roll rate from 30 DPD to 60 DPD in 
+the pool’s history. The rating agency has scheduled an emergency surveillance call for tomorrow 
+morning and needs updated static pool loss curves, dynamic loss rates, and a revised ECL 
+estimate by 8 AM. 
+Challenge Points: 
+●​ Build DAX measures to compute the roll rate matrix showing transition probabilities for 
+every DPD bucket for the last 6 months. 
+●​ Update the static pool vintage analysis showing cumulative loss curves for each 
+origination quarter, highlighting the 2022 vintage divergence. 
+●​ Compute revised ECL using updated PD term structures reflecting the observed 
+deterioration. 
+●​ Identify whether any waterfall trigger (delinquency trigger, loss trigger, or 
+overcollateralisation trigger) has been breached or is at risk. 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 71 
+ 
+ 
+ 
+ 
+ 
+●​ Prepare a 3-page dashboard for the rating agency call: Pool Summary, Vintage 
+Comparison, and Trigger Status. 
+●​ All DAX measures must execute in <100ms - the rating agency analyst will be navigating 
+the dashboard live during the call. 
+B3.3 Business Model And Monetisation 
+Revenue Streams: 
+●​ B2B SaaS - Bank Structured Finance Training: Annual subscription per user; pricing 
+range ₹12,000–20,000 per user per year; target: 50+ banks and NBFCs with structured 
+finance teams averaging 15 analysts each. 
+●​ NISM/CFA Preparation Module: Stand-alone retail module aligned to CFA structured 
+products and NISM certification syllabi; retail price ₹4,999 per candidate. 
+●​ Corporate Assessment Product: White-label version for bank recruitment and talent 
+assessment; price per hiring cycle ₹75,000 per campaign. 
+●​ University Licensing: Annual license for MBA Finance, M.Com, and CA programs; ₹3–5 
+lakh per institution per year. 
+●​ Zetheta Securitisation Analytics Certification: Formal certification upon completing all 8 
+levels; fee ₹7,999 per candidate. 
+5-Year Revenue Projection (Base Case): 
+Year 
+B2B SaaS 
+Retail 
+University 
+Certification 
+Total 
+Year 1 
+5 banks × 10 
+users × ₹12K 
+= ₹6L 
+200 × ₹5K = 
+₹10L 
+- 
+- 
+≈₹16 lakh 
+Year 2 
+15 banks 
+500 retail 
+3 licenses 
+- 
+≈₹1.8 crore 
+Year 3 
+30 banks 
+2,000 retail 
+10 licenses 
+Launch 
+≈₹5.2 crore 
+Year 4 
+45 banks 
+5,000 retail 
+20 licenses 
+Active 
+≈₹12 crore 
+Year 5 
+60+ 
+institutions 
+10,000 retail 
+35 licenses 
+Full scale 
+≈₹22 crore 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 72 
+ 
+ 
+ 
+ 
+ 
+PART C: CASE STUDIES & REAL-WORLD APPLICATIONS 
+SECTION C1: THE 2008 GLOBAL FINANCIAL CRISIS - SECURITISATION 
+MELTDOWN 
+C1.1 Background 
+The 2007–2009 Global Financial Crisis was, at its core, a securitisation crisis. US subprime 
+mortgage-backed securities, which had been rated AAA by major rating agencies, experienced 
+catastrophic default rates as the housing bubble burst. The crisis revealed fundamental flaws in 
+securitisation analytics: models assumed perpetually rising house prices, correlation assumptions 
+between mortgage defaults were grossly underestimated, and loan-level data quality was 
+compromised by originate-to-distribute incentive misalignment. The collapse of Lehman 
+Brothers, the bailout of AIG, and the freeze of global credit markets were direct consequences of 
+securitisation risk being systematically underestimated. 
+C1.2 Data Analytics Lessons For Securitisation 
+Lesson 
+Analytics Failure 
+DAX Solution 
+Vintage Analysis 
+Performance not tracked by 
+origination cohort; 
+deterioration diluted in pool 
+averages 
+CALCULATE with FILTER 
+on origination date; 
+DATESYTD for cumulative 
+loss curves 
+Roll Rate Early Warning 
+Transition from 30 DPD to 60 
+DPD not monitored 
+systematically 
+CALCULATETABLE with 
+PREVIOUSMONTH; 
+automated roll rate matrix and 
+alerts 
+Concentration Risk 
+Geographic concentration in 
+CA, FL, NV, AZ amplified 
+losses 
+HHI measure using SUMX; 
+TOPN exposure reporting; 
+geographic heatmaps 
+Stress Testing Severity 
+Tests used mild 5–10% 
+decline; actual exceeded 30% 
+What-if parameters in Power 
+BI; multiple severity scenario 
+measures 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 73 
+ 
+ 
+ 
+ 
+ 
+C1.3 Securitisation Risk Arena Simulation Scenario 
+Level 8 of Securitisation Risk Arena replicates a 2008-style crisis. The player must: detect 
+vintage deterioration signals using static pool analysis, build roll rate early-warning measures, 
+compute stress-adjusted ECL under severe scenarios, identify trigger breaches across all 6 pools, 
+and prepare a comprehensive crisis dashboard for the Chief Risk Officer within a 60-minute time 
+limit. 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 74 
+ 
+ 
+ 
+ 
+ 
+SECTION C2: THE IL&FS CRISIS (2018) - INDIAN STRUCTURED FINANCE 
+COLLAPSE 
+C2.1 Background 
+In September 2018, Infrastructure Leasing & Financial Services (IL&FS), one of India’s largest 
+infrastructure finance companies, defaulted on its commercial paper and bond obligations, 
+triggering a crisis across India’s structured finance and NBFC sectors. IL&FS group entities had 
+issued securitised instruments backed by infrastructure project receivables and loan portfolios. 
+The crisis exposed cascading risks: SPV cash flows were disrupted as underlying project 
+payments stalled, investors in pass-through certificates (PTCs) faced payment delays, and the 
+broader NBFC sector experienced a liquidity crunch as mutual funds and banks pulled back from 
+structured finance exposure. 
+C2.2 Data Analytics Implications 
+Implication 1: Counterparty Concentration In Securitisation Pools 
+Several securitisation pools had exposure to IL&FS group entities as borrowers or guarantors. 
+The lesson: DAX measures for obligor concentration (top 10 borrower exposure, single-name 
+concentration limits) are critical for securitisation analytics. Power BI dashboards must highlight 
+counterparty risk at both loan-level and pool-level. 
+Implication 2: Real-Time Collection Monitoring 
+The IL&FS crisis demonstrated that monthly reporting cycles are insufficient for detecting cash 
+flow disruptions in securitisation pools. DAX time-intelligence measures with daily or weekly 
+granularity, combined with collection efficiency ratios (actual collections vs scheduled 
+collections), provide the real-time monitoring that was absent. 
+Implication 3: Rbi Regulatory Response 
+Post-IL&FS, the RBI revised its securitisation framework (September 2021), introducing stricter 
+Minimum Holding Period and Minimum Retention Requirements. The revised framework 
+requires originators to retain a minimum 10% of each tranche issued, ensuring skin-in-the-game. 
+DAX measures must track compliance with these requirements in investor reporting dashboards. 
+C2.3 Securitisation Risk Arena Simulation Scenario 
+A mid-level scenario simulates the discovery that a major borrower in the auto loan ABS pool 
+has been flagged as a stressed entity by the Reserve Bank. The player must: identify all loans 
+linked to the entity across pools, compute the exposure as a percentage of total pool balance, 
+assess the ECL impact under an immediate default assumption, check whether the pool’s credit 
+enhancement is sufficient to absorb the concentrated loss, and prepare a risk assessment note for 
+the credit committee. 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 75 
+ 
+ 
+ 
+ 
+ 
+SECTION C3: RBI REVISED SECURITISATION FRAMEWORK (2021) 
+C3.1 Background 
+The Reserve Bank of India issued its revised framework for securitisation of standard assets in 
+September 2021 (RBI/2021-22/85 DOR.STR.REC.51/21.04.177/2021-22), replacing the 2006 
+guidelines. The revised framework introduced significant changes: Minimum Retention 
+Requirement (MRR) of 10% of each tranche, Minimum Holding Period (MHP) based on 
+repayment frequency, simplified securitisation structures with only two categories (securitisation 
+and direct assignment), and enhanced disclosure requirements for originators and investors. 
+Provision 
+Requirement 
+DAX Analytics Impact 
+Minimum Retention (MRR) 
+10% of each tranche 
+Track retained portion per 
+tranche; compliance 
+dashboard 
+Minimum Holding Period 
+Based on repayment 
+frequency 
+Date-based eligibility 
+measure using DATEDIFF 
+Structure Types 
+Securitisation or Direct 
+Assignment only 
+Pool classification and 
+reporting segregation 
+Disclosure Requirements 
+Enhanced originator and 
+investor reporting 
+Automated loan-level and 
+pool-level reporting measures 
+Credit Enhancement 
+Must be disclosed and tracked CE computation measures; 
+tranche subordination 
+tracking 
+Skin-in-the-Game 
+First loss or proportional 
+retention 
+Retained interest valuation 
+and risk-weighting measures 
+ 
+C3.2 Impact On Securitisation Analytics 
+The revised framework requires enhanced data analytics capabilities: loan-level data tapes must 
+be more granular to support investor due diligence; pool performance reporting must include 
+standardised metrics specified by RBI; originators must demonstrate that retained risk is 
+computed correctly; and trustees must receive monthly reports with pool-level performance 
+summaries. DAX-based analytics platforms are ideally suited for these requirements - measures 
+can compute MRR compliance, generate standardised pool reports, and produce loan-level data 
+exports matching regulatory specifications. 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 76 
+ 
+ 
+ 
+ 
+ 
+SECTION C4: INDUSTRY BEST PRACTICES - SECURITISATION ANALYTICS 
+EXCELLENCE 
+C4.1 Industry-Leading Operational Frameworks 
+Straight-Through Data Processing: 
+Leading banks and NBFCs implement automated data pipelines from loan origination systems to 
+Power BI models. Monthly performance data flows directly from SAP/ERP systems into the star 
+schema data model, with DAX measures auto-computing all pool metrics. Analysts review 
+exception reports and dashboard alerts rather than manually computing monthly figures. 
+Automated Early-Warning Systems: 
+Power BI dashboards with DAX-driven alert measures monitor delinquency migration rates, 
+prepayment speed changes, loss severity trends, and trigger proximity. Conditional formatting 
+and data-driven alerts notify the analytics team when any metric crosses pre-defined thresholds. 
+Rating Agency Reporting Automation: 
+Instead of manually compiling loan-level data tapes for each rating agency review, leading 
+institutions use DAX measures to maintain continuously updated data tapes that can be exported 
+on demand. Pool stratification tables, performance summaries, and compliance metrics are 
+always current. 
+C4.2 Lessons For Intern Data Analysts 
+●​ DAX Proficiency is the Core Competency: Modern securitisation analytics is built on 
+DAX. The ability to write complex, performant measures that produce auditable results is 
+the single most important technical skill. 
+●​ Data Quality is Non-Negotiable: The value of analytics depends entirely on data quality. 
+Loan-level data must be complete, consistent, and reconcilable to source systems. DAX 
+IFERROR and validation measures are essential. 
+●​ Business Context Elevates Technical Work: A DAX measure that computes a 
+delinquency rate is technical; understanding why that rate matters for tranche investors, 
+rating agencies, and regulators transforms the analyst from a technician to a business 
+advisor. 
+●​ Documentation and Audit Trail: Every DAX measure must be documented in a measure 
+dictionary with its business purpose, formula, and expected behaviour. This is 
+non-negotiable in regulated financial services. 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 77 
+ 
+ 
+ 
+ 
+ 
+PART D: 15-DAY PROJECT METHODOLOGY & DELIVERABLES 
+SECTION D1: OVERVIEW 
+The 15-day project is structured as a progressive deep-dive into securitisation data analytics 
+using advanced DAX in Power BI. The intern will move from domain immersion through data 
+modelling, DAX measure development, dashboard construction, and case study analysis to 
+produce a comprehensive submission package. Each phase builds on the previous. Deliverables 
+are cumulative and must be compiled into a final submission document. 
+The methodology uses AI-accelerated research and development - interns are encouraged to use 
+Claude.ai, Perplexity.ai, and similar tools for research synthesis, initial DAX structuring, and 
+concept validation. However, all DAX measures must be tested in DAX Studio for correctness 
+and performance, all financial figures must be verified against primary sources (RBI circulars, 
+SEBI guidelines, rating agency methodologies), and all data models must be validated with 
+crosscheck calculations. Unverified AI output treated as final will be penalised. 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 78 
+ 
+ 
+ 
+ 
+ 
+SECTION D2: DAY-BY-DAY BREAKDOWN 
+Day 
+Focus Area 
+Key Deliverable 
+1 
+Domain Orientation 
+Securitisation landscape summary with 
+regulatory framework map 
+2 
+Data Architecture & Star Schema 
+Power BI model with star schema and 
+relationships 
+3 
+Core DAX Measures (30+) 
+Measure dictionary; pool balance, count, and 
+weighted average measures 
+4 
+Time Intelligence & Trends 
+YTD/QTD/MTD/rolling measures; trend 
+analysis dashboard 
+5 
+Advanced DAX & Virtual Tables 
+Stratification measures; concentration analysis; 
+HHI 
+6 
+Waterfall & Tranche Allocation 
+Waterfall model; trigger testing; credit 
+enhancement tracking 
+7 
+DPD & Roll Rate Analysis 
+DPD dashboard; roll rate matrix; ageing report 
+8 
+Vintage / Static Pool Analysis 
+Cumulative loss curves; vintage comparison 
+charts 
+9 
+IFRS 9 ECL Framework 
+ECL model; stage classification; Excel 
+crosscheck 
+10 
+Stress Testing & What-If 
+Stress testing dashboard with interactive 
+parameters 
+11 
+Investor Reporting & Data Tapes 
+6 servicer report sections; rating agency data 
+tape export 
+12 
+Security, Governance & Testing 
+RLS for 5+ roles; DAX Studio performance 
+report 
+13 
+Case Studies & Documentation 
+First-draft report; two case study analyses 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 79 
+ 
+ 
+ 
+ 
+ 
+14 
+Validation & Polish 
+Validated draft; optimised model; presentation 
+deck 
+15 
+Final Compilation & Handover 
+Final PDF + presentation + model + Excel + 
+GitHub transfer 
+ 
+Day 1 - Domain Orientation: 
+Learning Goals: Build familiarity with the securitisation ecosystem and data analytics role. 
+●​ Read RBI’s revised securitisation framework (September 2021) and SEBI securitisation 
+guidelines. 
+●​ Study rating agency methodologies: S&P LEVELS model, Moody’s Idealised Default 
+Rate tables, CRISIL securitisation criteria. 
+●​ Review the provided CSV datasets: auto loan pool (500 loans), DPD snapshot history, 
+static pool vintage data, dynamic loss monthly data. 
+●​ Map the data fields to rating agency requirements - identify which fields are present and 
+which need to be computed via DAX. 
+●​ Initialise PRIVATE GitHub repository with README and project structure. 
+Deliverable: One-page summary of India’s securitisation landscape with regulatory framework 
+map and data field mapping. 
+ 
+Day 2 - Data Architecture And Star Schema: 
+Learning Goals: Design and build the foundational data model in Power BI. 
+●​ Design star schema: DimLoan, DimDate, DimGeography, DimBorrower, DimVehicle, 
+FactMonthlyPerformance, FactStaticPool, FactDynamicLoss. 
+●​ Import all CSV files into Power BI Desktop. 
+●​ Configure relationships and role-playing dimensions (origination date vs reporting date). 
+●​ Set up DimDate with fiscal calendar alignment and month-end date logic. 
+●​ Validate data model with basic aggregation queries. 
+Deliverable: Power BI model file with star schema, relationships documented in a data model 
+diagram. 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 80 
+ 
+ 
+ 
+ 
+ 
+Day 3 - Core Dax Measures (Foundational): 
+Learning Goals: Build the first 30+ measures covering basic pool metrics. 
+●​ Build pool balance measures: Total Outstanding, Current Balance, Original Balance. 
+●​ Build count measures: Active Loans, Defaulted Loans, Prepaid Loans. 
+●​ Implement CALCULATE patterns with filter modifications for delinquency buckets 
+(Current, 30 DPD, 60 DPD, 90 DPD, 120+ DPD). 
+●​ Create weighted average measures using SUMX: WAC, WAM, WALA, WALT, Weighted 
+Average LTV. 
+Deliverable: Power BI model with 30+ measures; DAX measure dictionary (Excel) documenting 
+each measure’s formula and business purpose. 
+ 
+Day 4 - Time Intelligence And Trend Analysis: 
+Learning Goals: Implement comprehensive time intelligence for historical analysis. 
+●​ Build YTD, QTD, MTD measures for all key metrics. 
+●​ Implement rolling 3-month and 12-month averages for delinquency and loss rates. 
+●​ Create period-over-period comparison measures (vs prior month, vs prior quarter, vs prior 
+year). 
+●​ Build trend deviation alerts: flag any metric that moves more than 2 standard deviations 
+from its 12-month average. 
+Deliverable: Updated Power BI model with time intelligence measures; trend analysis dashboard 
+page. 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 81 
+ 
+ 
+ 
+ 
+ 
+Day 5 - Advanced Dax And Virtual Tables: 
+Learning Goals: Master iterator functions, virtual tables, and context transition. 
+●​ Build virtual table measures using SUMMARIZE and ADDCOLUMNS for pool 
+stratification (by geography, by LTV band, by vintage, by credit score band). 
+●​ Implement TOPN and RANKX for concentration analysis (top 10 borrowers, top 5 
+geographic concentrations). 
+●​ Create HHI (Herfindahl-Hirschman Index) concentration measure. 
+●​ Build context transition examples showing CALCULATE inside SUMX for 
+portfolio-level ECL computation. 
+Deliverable: Updated model with advanced measures; pool stratification dashboard page. 
+ 
+Day 6 - Waterfall And Tranche Allocation: 
+Learning Goals: Build complete cash flow waterfall in DAX. 
+●​ Implement sequential waterfall allocation: collections flow to senior tranche first, then 
+mezzanine, then equity. 
+●​ Build trigger testing measures: delinquency trigger, loss trigger, overcollateralisation 
+trigger. 
+●​ Compute credit enhancement levels for each tranche. 
+●​ Model trigger breach scenarios using what-if parameters. 
+Deliverable: Waterfall allocation model in Power BI; trigger status dashboard page. 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 82 
+ 
+ 
+ 
+ 
+ 
+Day 7 - Dpd And Roll Rate Analysis: 
+Learning Goals: Build comprehensive delinquency analytics. 
+●​ Using the DPD snapshot history data, build DPD distribution measures for each reporting 
+month. 
+●​ Implement roll rate (transition) matrix showing monthly migration between DPD 
+buckets. 
+●​ Build DPD ageing report showing how long loans have been in each delinquency bucket. 
+●​ Create a DPD trend dashboard with conditional formatting for deteriorating metrics. 
+Deliverable: DPD analytics dashboard page with roll rate matrix and trend charts. 
+ 
+Day 8 - Vintage / Static Pool Analysis: 
+Learning Goals: Build vintage analysis framework using static pool data. 
+●​ Using the static pool vintage data, build cumulative default rate and cumulative loss rate 
+curves by origination vintage. 
+●​ Create vintage comparison charts showing each vintage’s loss trajectory. 
+●​ Build loss timing curve measures for rating agency requirements. 
+●​ Implement vintage-level weighted average metrics (WAC, WALA by vintage). 
+Deliverable: Vintage analysis dashboard page; static pool loss curve charts. 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 83 
+ 
+ 
+ 
+ 
+ 
+Day 9 - Ifrs 9 Ecl Framework: 
+Learning Goals: Build IFRS 9 Expected Credit Loss computation in DAX. 
+•​
+Implement stage classification logic: Stage 1 (current/30 DPD), Stage 2 (60–90 DPD), 
+Stage 3 (120+ DPD/default). 
+•​
+Build PD term structure measures using historical transition matrices. 
+•​
+Compute LGD using recovery rate data from the pool. 
+•​
+Calculate EAD for each stage. 
+•​
+Compute 12-month ECL (Stage 1) and lifetime ECL (Stages 2 and 3). 
+•​
+Cross-validate ECL results against an Excel computation. 
+Deliverable: IFRS 9 ECL model in Power BI; Excel crosscheck workbook; ECL dashboard page. 
+ 
+Day 10 - Stress Testing And What-If Analysis: 
+Learning Goals: Build parameterised stress testing framework. 
+●​ Set up what-if parameters: default rate multiplier, recovery rate haircut, prepayment 
+speed change, interest rate shock. 
+●​ Build stress-adjusted ECL measures that respond to parameter changes. 
+●​ Create scenario comparison dashboard: base case vs moderate stress vs severe stress vs 
+crisis. 
+●​ Model the impact of stress on waterfall trigger proximity. 
+Deliverable: Stress testing dashboard page with interactive what-if parameters. 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 84 
+ 
+ 
+ 
+ 
+ 
+Day 11 - Investor Reporting And Rating Agency Data Tapes: 
+Learning Goals: Build complete investor reporting suite. 
+●​ Build all 6 monthly servicer report sections in DAX: Pool Summary, Delinquency 
+Report, Loss & Recovery Report, Prepayment Report, Waterfall Report, Trigger Status. 
+●​ Create rating agency data tape export functionality with all required fields for S&P, 
+Moody’s, and CRISIL. 
+●​ Build ESG data fields as emerging standard additions. 
+Deliverable: Investor reporting dashboard pages; data tape export page. 
+ 
+Day 12 - Security, Governance, And Testing: 
+Learning Goals: Implement enterprise-grade security and validate all measures. 
+●​ Implement Row-Level Security (RLS) for 5+ roles: Portfolio Manager, Risk Analyst, 
+Senior Management, Auditor, Servicer. 
+●​ Performance test all measures in DAX Studio (<100ms target). 
+●​ Validate ECL calculations against Excel crosscheck. 
+●​ Validate waterfall allocation against manual computation. 
+●​ Complete the DAX measure dictionary with all 80+ measures documented. 
+Deliverable: RLS implementation; DAX Studio performance report; validation workbook. 
+ 
+Day 13 - Case Study Analysis And Documentation: 
+Learning Goals: Apply securitisation analytics lens to real-world events. 
+●​ Write 2008 Global Financial Crisis case study from a securitisation data analytics 
+perspective (2 pages). 
+●​ Write IL&FS Crisis case study from a structured finance analytics perspective (2 pages). 
+●​ Compile all outputs from Days 1–12 into a structured draft report following the Part A–F 
+format. 
+●​ Write Executive Summary (2 pages). 
+Deliverable: Complete first-draft report; two case study analyses. 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 85 
+ 
+ 
+ 
+ 
+ 
+Day 14 - Validation And Polish: 
+Learning Goals: Final quality assurance. 
+●​ Fact-check all regulatory figures against RBI and SEBI primary sources. 
+●​ Verify all DAX measures are formula-driven with no hard-coded values. 
+●​ Re-run DAX Studio performance tests; optimise any measure exceeding 100ms. 
+●​ Proofread all text. Ensure all tables and diagrams have captions and are legible. 
+●​ Prepare a 10-slide final presentation deck. 
+Deliverable: Validated, proofread draft; optimised Power BI model. 
+ 
+Day 15 - Final Compilation, Deployment, And Handover: 
+Learning Goals: Deploy and submit. 
+●​ Publish Power BI model to Power BI Service. 
+●​ Compile all sections into a final PDF report. 
+●​ Transfer GitHub repository ownership to @ZethetaIntern. 
+●​ Deliver final presentation. 
+●​ Upload all deliverables to the submission portal. 
+Deliverable: Final PDF report + 10-slide presentation + Power BI model + Excel workbooks + 
+GitHub repository. 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 86 
+ 
+ 
+ 
+ 
+ 
+SECTION D3: MANDATORY DELIVERABLES CHECKLIST 
+Deliverable 
+Weight 
+Format 
+Description 
+Main Report 
+35% 
+PDF/Docx 
+All 6 parts compiled, professional 
+formatting, 40+ pages, original 
+analysis 
+Power BI Model 
+25% 
+.pbix 
+Star schema, 80+ DAX measures, 8+ 
+dashboards, RLS implemented 
+Excel Workbooks 
+15% 
+.xlsx 
+ECL crosscheck, waterfall validation, 
+DAX measure dictionary (100%) 
+Final Presentation 
+15% 
+PDF/Slides 
+10 slides, professional design, covers 
+all modules 
+GitHub Repository 
+10% 
+PRIVATE repo 
+All documentation committed, model 
+versioned, ownership transferred 
+ 
+Submission Instructions: 
+●​ All files to be named using convention: ProjectCode_YourName_DeliverableName (e.g., 
+201169C_RahulShah_MainReport) 
+●​ All PDFs must be readable and not password-protected 
+●​ Supporting Excel files must be in .xlsx format 
+●​ All daily deliverables across Days 1–15 are to be submitted on Day 15 as a consolidated 
+final submission. Students should combine their work into one or two PDFs and/or one 
+Excel file wherever possible, rather than submitting separate files for each day. Clearly 
+label each section within the consolidated document by its respective day and topic for 
+ease of assessment. 
+●​ Late submissions attract the penalties specified in Part F Assessment Criteria 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 87 
+ 
+ 
+ 
+ 
+ 
+Technology Stack 
+Category 
+Technology 
+Purpose 
+Primary Analytics 
+Power BI Desktop 
+Dashboard development, DAX 
+authoring 
+DAX Debugging 
+DAX Studio 
+Query profiling, performance 
+testing 
+Data Modelling 
+Tabular Editor 
+Advanced model editing, best 
+practice rules 
+Data Source 
+Auto Loan CSV (provided) 
+500 loans, 50+ fields per loan 
+Spreadsheet 
+Power Pivot (Excel) 
+Prototype measures, 
+cross-validation 
+Version Control 
+GitHub (PRIVATE) 
+Code, PBIX, documentation 
+AI Code Generation 
+Claude.ai, ChatGPT, Cursor 
+DAX generation and validation 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 88 
+ 
+ 
+ 
+ 
+ 
+PART E: NO-CODE TOOLS & PLATFORMS GUIDE 
+SECTION E1: DATA AND COMPUTATION TOOLS 
+E1.1 Microsoft Power BI Desktop 
+URL: powerbi.microsoft.com | Free: Power BI Desktop is free; Pro license for sharing. 
+Key Uses For This Project: 
+●​ Star Schema Data Model: Import all CSV datasets and establish relationships between 
+dimension and fact tables. 
+●​ DAX Measure Development: Write all 80+ measures directly in the model. 
+●​ Dashboard Construction: Build 8+ interactive pages with slicers, drill-through, 
+bookmarks, and conditional formatting. 
+●​ Row-Level Security: Configure role-based data access for 5+ user roles. 
+●​ What-If Parameters: Create interactive stress testing scenarios. 
+ 
+E1.2 DAX Studio 
+URL: https://daxstudio.org/ | Free: Completely free and open-source. 
+Key Uses For This Project: 
+●​ Performance Testing: Measure query execution time for all DAX measures (<100ms 
+target). 
+●​ Query Debugging: Step through complex DAX evaluations to identify context errors. 
+●​ Data Export: Export query results for Excel crosscheck validation. 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 89 
+ 
+ 
+ 
+ 
+ 
+E1.3 Google Sheets/ Microsoft Excel 
+Purpose: Crosscheck computations and documentation. 
+Key Uses For This Project: 
+●​ IFRS 9 ECL Crosscheck: Build a parallel ECL computation in Excel to validate DAX 
+results. 
+●​ Waterfall Validation: Manual waterfall allocation computation to crosscheck DAX 
+measures. 
+●​ DAX Measure Dictionary: Document all 80+ measures with formula, business purpose, 
+and expected output. 
+●​ Revenue Projection: 5-year financial model for business case. 
+ 
+Essential Excel Functions For Securitisation Analytics: 
+ 
+Function 
+Use in This Project 
+Example 
+SUMPRODUCT() 
+Weighted averages 
+(WAC, WAM, WALA, 
+LTV) 
+=SUMPRODUCT(Balance,Rate)/SUM(
+Balance) 
+IF() / nested IF() 
+Stage classification, 
+bucket assignment, 
+trigger testing 
+=IF(DPD>90,"Stage 
+3",IF(DPD>30,"Stage 2","Stage 1")) 
+MAX(0, value) 
+Loss severity, CE floor 
+calculation 
+=MAX(0, Face-Recovery) 
+VLOOKUP() / 
+INDEX-MATCH() 
+PD and LGD parameter 
+lookup by segment 
+=INDEX(PD_Table,MATCH(Rating,Rat
+ing_Col,0)) 
+IFERROR() 
+Handle missing data, 
+expired positions 
+=IFERROR(Balance/Original,0) 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 90 
+ 
+ 
+ 
+ 
+ 
+SECTION E2: DESIGN AND DOCUMENTATION TOOLS 
+E2.1 Figma / Miro / Canva 
+URL: https://www.figma.com/ | https://miro.com/ | https://www.canva.in/ 
+●​ Figma / Miro: Dashboard wireframe design; data model ER diagram; waterfall flow 
+diagram. 
+●​ Canva: Presentation slide design; badge design visuals for gamification. 
+●​ Lucidchart / draw.io (free): ER diagram for star schema; securitisation structure flow 
+chart. 
+ 
+E2.2 Notion / Google Docs 
+URL: https://www.notion.com/ | https://docs.google.com/ | Purpose: Report drafting and project 
+management. 
+●​ Draft all sections from Day 1 onwards; do not leave documentation to Days 13–15. 
+●​ Use heading styles consistently for automatic table of contents generation. 
+●​ Save all versions with date-stamped file names. 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 91 
+ 
+ 
+ 
+ 
+ 
+SECTION E3: RESEARCH AND REGULATORY DATA SOURCES 
+E3.1 RBI Website (https://rbi.org.in/) 
+●​ RBI/2021-22/85 - Master Direction on Securitisation of Standard Assets (September 
+2021) 
+●​ RBI IRAC Norms - Income Recognition, Asset Classification, and Provisioning 
+●​ RBI Circular on SMA Classification 
+●​ RBI Guidelines on IFRS 9/Ind AS 109 implementation 
+ 
+E3.2 SEBI Website (https://www.sebi.gov.in/) 
+●​ SEBI (Issue and Listing of Securitised Debt Instruments) Regulations, 2008 
+●​ SEBI guidelines on credit rating agency methodologies for structured finance 
+●​ SEBI disclosure requirements for listed securitised instruments 
+ 
+E3.3 Rating Agency Methodologies 
+●​ S&P Global: LEVELS model for auto ABS, RMBS criteria, CLO criteria - 
+spglobal.com/ratings 
+●​ Moody’s: Idealised Default Rate tables, Indian ABS methodology - moodys.com 
+●​ CRISIL: Indian securitisation criteria, default and loss studies - crisil.com 
+●​ ICRA: Indian ABS and RMBS rating criteria - icra.in 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 92 
+ 
+ 
+ 
+ 
+ 
+E3.4 AI Research Tools 
+CLAUDE.AI: Use for explaining DAX patterns with securitisation context; summarising rating 
+agency methodologies; drafting initial DAX measures; brainstorming scenario design. Always 
+verify DAX measures in DAX Studio. Claude is a research accelerator, not a primary source for 
+regulatory compliance. 
+Example Prompts For This Project: 
+●​ 'Write a DAX measure for cumulative default rate by vintage quarter using 
+CALCULATETABLE and DATESYTD.' 
+●​ 'Explain the S&P LEVELS model for auto ABS with the key stress scenarios.' 
+●​ 'Help me design a roll rate matrix DAX measure for monthly transition probabilities.' 
+●​ 'Build an IFRS 9 stage classification DAX measure using SWITCH and CALCULATE.' 
+ 
+E3.5 DAX Learning Resources 
+●​ DAX Guide (https://dax.guide/): Comprehensive reference for all DAX functions. 
+●​ SQLBI (https://www.sqlbi.com/): Advanced DAX patterns by Marco Russo and Alberto 
+Ferrari. 
+●​ DAX Studio documentation: Performance profiling and query optimisation. 
+●​ Tabular Editor (https://tabulareditor.com/): Advanced model editing and best practice 
+analyser. 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 93 
+ 
+ 
+ 
+ 
+ 
+PART F: SUBMISSION PROTOCOL 
+ 
+Projects are assessed using a comprehensive 1000-point rubric covering seven dimensions: 
+Problem Understanding, Solution Quality, Research & Analysis, Presentation & Clarity, 
+Innovation & Creativity, Feasibility & Practicality and CV alignment. Assessment is conducted 
+through a combination of manual review and AI-powered evaluation. 
+ 
+SECTION F1: AUTOMATIC DISQUALIFIERS 
+The following issues result in automatic project rejection requiring re-submission: 
+●​ Repository not transferred to ZethetaIntern by the deadline 
+●​ Personal API keys, passwords, or credentials committed to the repository 
+●​ Test coverage below 60% (hard minimum) 
+●​ Plagiarism: code copied from existing repositories without attribution and modification 
+●​ Data leakage: training data contaminating the test set (especially random splits on 
+material data) 
+●​ Non-functional Docker build: docker-compose up must start all services without errors 
+●​ Missing technical report or README 
+●​ Personal forks or copies retained after transfer (verified by Zetheta’s security team) 
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 94 
+ 
+ 
+ 
+ 
+ 
+SECTION F2: SUBMISSION FINAL CHECKLIST 
+Before executing the repository transfer, verify every item: 
+●​ All code committed and pushed to main branch (no dangling branches with unmerged 
+work) 
+●​ All tests passing in CI/CD pipeline (green checkmark on latest commit) 
+●​ DVC remote configured and all data files pushed 
+●​ MLflow experiments exported and committed 
+●​ Docker build succeeds without errors (test with docker-compose up --build) 
+●​ README.md is complete with architecture diagram and screenshots 
+●​ Technical report is complete (15–20 pages, 20+ references) 
+●​ Sphinx API documentation generated and committed to docs/ 
+●​ No personal API keys or credentials in repository (use .env.example template) 
+●​ LICENSE file present with Zetheta IP attribution 
+●​ .gitignore properly configured (no data files, no __pycache__, no .env, no mlruns/) 
+●​ Final commit message: “Final submission – MatRisk AI v1.0 — [Your Email Id] — 
+[Date]” 
+●​ Git tag created: git tag -a v1.0 -m “MatRisk AI v1.0 Final Submission” 
+●​ Repository to be transferred through Zetheta task pane in the projects ideally – if not 
+possible then Repository transferred via Settings → Danger Zone → Transfer Ownership 
+→ ZethetaIntern 
+●​ Confirmed repository appears under github.com/ZethetaIntern/matrisk-ai 
+●​ All local forks, copies, and clones deleted from personal devices 
+●​ Confirmation email sent to project supervisor with transfer timestamp and URL 
+ 
+Post-Transfer: ZethetaIntern will review the repository and score/ rank the submissions.  
+ 
+ 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 95 
+ 
+ 
+ 
+ 
+ 
+IP PROTECTION PROTOCOL: 
+All IP arising from this project including submissions made is the exclusive property of Zetheta 
+Algorithms Pvt. Ltd. as per the confidentiality terms accepted at project commencement 
+●​ All innovations documented with dated lab notebook entries in the technical report and 
+git commit history 
+●​ Novel algorithms include pseudo-code and mathematical formulation in patent-ready 
+format 
+●​ Comparative results against prior art quantified and documented in the model 
+performance report 
+●​ The GitHub repository commit history serves as a timestamped invention record under 
+Indian patent law 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+END OF PROJECT DOCUMENT 
+Strictly Private and Confidential - Not for Circulation                                                                          Page number: 96 
+ 
